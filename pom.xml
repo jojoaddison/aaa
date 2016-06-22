@@ -11,7 +11,7 @@
 
     <groupId>org.agreen</groupId>
     <artifactId>agreen</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>war</packaging>
     <name>Agreen</name>
 
@@ -325,6 +325,7 @@
     </dependencies>
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
+        <finalName>agreenserver</finalName>
         <plugins>
             <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
