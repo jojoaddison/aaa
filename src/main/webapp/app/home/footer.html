@@ -1,0 +1,95 @@
+<!-- #footer start -->
+
+<footer id="footer">
+    <!-- .container start -->
+    <div class="container" >
+        <!-- .row start -->
+        <div class="row">
+            <!-- .footer-widget-container start -->
+            <ul class="col-md-4 footer-widget-container" style="vertical-align: top; margin-top: 5px;">
+                <!-- .widget.widget_text -->
+                <li class="widget widget_newsletterwidget">
+                    <div class="title">
+                        <h3 translate="footer.newsletter.title"></h3>
+                    </div>
+
+                    <p translate="footer.newsletter.content">
+                    </p>
+
+                    <br />
+
+                    <form class="newsletter">
+                        <input class="email" type="email" placeholder="Ihre Emailadresse">
+                        <button class="submit bkg-dark-yellow">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
+
+            <!-- .footer-widget-container start -->
+            <div class="col-md-4 footer-widget-container">
+                <!-- .widget_pages start -->
+                <ul>
+                    <li class="widget widget_pages">
+                        <div class="title">
+                            <h3 translate="footer.association.title"></h3>
+                        </div>
+
+                        <ul>
+                            <li ng-repeat="link in association.links track by $index">
+
+                                <a href="#/{{link.url}}">{{link.label}}</a>
+                            </li>
+                        </ul>
+                    </li><!-- .widget.widget_pages end -->
+                </ul>
+            </div><!-- .footer-widget-container end -->
+
+
+            <!-- .footer-widget-container start -->
+            <div class="col-md-4 footer-widget-container">
+                <ul>
+                    <!-- .widget.contact-info start -->
+                    <li class="widget contact-info">
+                        <div class="title">
+                            <h3 translate="footer.about.title"></h3>
+                        </div>
+
+                        <p translate="footer.about.content">
+                        </p>
+                    </li><!-- .widget.contact-info end -->
+                </ul>
+            </div><!-- .footer-widget-container end -->
+        </div><!-- .row end -->
+    </div><!-- .container end -->
+</footer><!-- #footer end -->
+
+<a href="#" class="scroll-up">#</a>
+
+
+<!-- #copyright-container start -->
+<div id="copyright-container">
+    <!-- .container start -->
+    <div class="container">
+        <!-- .row start -->
+        <div class="row">
+            <!-- .col-md-6 start -->
+            <div class="col-md-6">
+                <p>&reg;Africa Afforestation Association e.V. &copy;2016</p>
+            </div><!-- .ocl-md-6 end -->
+
+            <!-- .col-md-6 start -->
+            <div class="col-md-6">
+                <ul class="breadcrumb footer-breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/" target="_blank">Impressum</a></li>
+                    <li><a href="/">Contact</a></li>
+                </ul>
+            </div><!-- .col-md-6 end -->
+        </div><!-- .row end -->
+    </div><!-- .container end -->
+</div>
+<!-- .copyright-container end -->
+

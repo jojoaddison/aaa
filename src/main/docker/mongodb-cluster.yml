@@ -1,0 +1,17 @@
+version: '2'
+services:
+    agreen-mongodb:
+        container_name: agreen-mongodb
+        image: mongo:3.3.5
+        ports:
+            - "27017:27017"
+        command: mongos --configdb agreen-mongodb-config
+    agreen-mongodb-node:
+        build:
+            context: .
+            dockerfile: mongodb/MongoDB.Dockerfile
+        command: mongod --replSet rs1 --noprealloc --smallfiles
+    agreen-mongodb-config:
+        image: mongo:3.3.5
+        container_name: agreen-mongodb-config
+        command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db

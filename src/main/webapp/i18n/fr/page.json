@@ -1,0 +1,24 @@
+{
+    "agreenApp": {
+        "page" : {
+            "home": {
+                "title": "Pages",
+                "createLabel": "Créer un nouveau Page",
+                "createOrEditLabel": "Créer ou éditer un Page",
+                "search": "Recherche pour Page"
+            },
+            "created": "Un nouveau Page a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Page avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Page avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Page {{ id }} ?"
+            },
+            "detail": {
+                "title": "Page"
+            },
+            "title": "Title",
+            "content": "Content",
+            "link": "Link"
+        }
+    }
+}
