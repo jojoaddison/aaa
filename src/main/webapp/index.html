@@ -62,12 +62,11 @@
     <!-- build:js app/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/messageformat/messageformat.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
-    <script src="bower_components/angular-revolution/release/angular-revolution.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
@@ -88,9 +87,9 @@
     <script src="bower_components/angular-bootstrap-material/angular-bootstrap-material.min.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
-
-    <script src="content/rs/js/jquery.themepunch.tools.min.js"></script><!-- Revolution slider script -->
-    <script src="content/rs/js/jquery.themepunch.revolution.min.js"></script><!-- Revolution slider script -->
+    <script src="content/rs/js/jquery.themepunch.tools.min.js"></script>
+    <script src="content/rs/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="bower_components/angular-revolution/release/angular-revolution.js"></script>
 
     <!-- build:js app/app.js  -->
     <!-- inject:js -->
@@ -124,6 +123,12 @@
     <script src="app/entities/page/page.service.js"></script>
     <script src="app/entities/page/page.controller.js"></script>
     <script src="app/entities/entity.state.js"></script>
+    <script src="app/entities/album/album-dialog.controller.js"></script>
+    <script src="app/entities/album/album-detail.controller.js"></script>
+    <script src="app/entities/album/album-delete-dialog.controller.js"></script>
+    <script src="app/entities/album/album.state.js"></script>
+    <script src="app/entities/album/album.service.js"></script>
+    <script src="app/entities/album/album.controller.js"></script>
     <script src="app/components/util/truncate-words.filter.js"></script>
     <script src="app/components/util/truncate-characters.filter.js"></script>
     <script src="app/components/util/sort-by.directive.js"></script>
@@ -180,6 +185,9 @@
     <script src="app/admin/health/health.modal.controller.js"></script>
     <script src="app/admin/health/health.controller.js"></script>
     <script src="app/admin/docs/docs.state.js"></script>
+    <script src="app/admin/dashboard/db.state.js"></script>
+    <script src="app/admin/dashboard/db.directives.js"></script>
+    <script src="app/admin/dashboard/db.controller.js"></script>
     <script src="app/admin/configuration/configuration.state.js"></script>
     <script src="app/admin/configuration/configuration.service.js"></script>
     <script src="app/admin/configuration/configuration.controller.js"></script>

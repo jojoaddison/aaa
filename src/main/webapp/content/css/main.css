@@ -392,6 +392,8 @@ ui bootstrap tweaks
     width: 40px;
     height: 40px;
     position: relative;
+    text-align: center;
+    vertical-align: middle !important;
     top: -40px;
     right: 20px;
     float: right;
