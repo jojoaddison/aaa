@@ -72,13 +72,15 @@
         var slideBox = $("#slider");
         var vm = this;
         vm.isAuthenticated = Principal.isAuthenticated();
+        vm.openAlbum = openAlbum;
 
         loadSlider();
 
         function loadSlider(){
             Slider.get().then(function(slides){
                 slideBox.html(slides.data);
-                showEditBtn(false);
+
+                showEditBtn(vm.isAuthenticated);
             });
         }
         $scope.$on('authenticationSuccess', function() {
@@ -103,9 +105,15 @@
                 editBtn.fadeIn();
             }
         }
+
         $scope.$on('logoutSuccess', function() {
             showEditBtn(false);
         });
 
+        function openAlbum(){
+            console.log("open-album");
+        }
+
     }
+
 })();
