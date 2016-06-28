@@ -9,12 +9,12 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('page', {
+        .state('album', {
             parent: 'dashboard',
-            url: '/page?page&sort&search',
+            url: '/album?page&sort&search',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'agreenApp.page.home.title'
+                pageTitle: 'agreenApp.album.home.title'
             },
             views: {
                 'header@': {
@@ -23,8 +23,8 @@
                     controllerAs: 'vm'
                 },
                 'content@': {
-                    templateUrl: 'app/entities/page/pages.html',
-                    controller: 'PageController',
+                    templateUrl: 'app/entities/album/albums.html',
+                    controller: 'AlbumController',
                     controllerAs: 'vm'
                 }
             },
@@ -50,60 +50,63 @@
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('page');
+                    $translatePartialLoader.addPart('album');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('page-detail', {
+        .state('album-detail', {
             parent: 'dashboard',
-            url: '/page/{id}',
+            url: '/album/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'agreenApp.page.detail.title'
+                pageTitle: 'agreenApp.album.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/page/page-detail.html',
-                    controller: 'PageDetailController',
+                    templateUrl: 'app/entities/album/album-detail.html',
+                    controller: 'AlbumDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('page');
+                    $translatePartialLoader.addPart('album');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Page', function($stateParams, Page) {
-                    return Page.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Album', function($stateParams, Album) {
+                    return Album.get({id : $stateParams.id}).$promise;
                 }]
             }
         })
-        .state('page.new', {
+        .state('album.new', {
             parent: 'dashboard',
-            url: '/page/new',
+            url: '/album/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/page/page-dialog.html',
-                    controller: 'PageDialogController',
+                    templateUrl: 'app/entities/album/album-dialog.html',
+                    controller: 'AlbumDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                            $translatePartialLoader.addPart('page');
+                            $translatePartialLoader.addPart('album');
                             return $translate.refresh();
                         }],
                         entity: function () {
                             return {
                                 name: null,
-                                title: null,
-                                content: null,
-                                link: [],
+                                url: null,
+                                description: null,
+                                photos: null,
+                                isDefault: null,
+                                created: null,
+                                modified: null,
                                 id: null
                             };
                         }
@@ -115,26 +118,26 @@
                 });
             }]
         })
-        .state('page.edit', {
+        .state('album.edit', {
             parent: 'dashboard',
-            url: '/page/{id}/edit',
+            url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/page/page-dialog.html',
-                    controller: 'PageDialogController',
+                    templateUrl: 'app/entities/album/album-dialog.html',
+                    controller: 'AlbumDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                            $translatePartialLoader.addPart('page');
-                            return $translate.refresh();
+                        $translatePartialLoader.addPart('album');
+                        return $translate.refresh();
                         }],
-                        entity: ['Page', function(Page) {
-                            return Page.get({id : $stateParams.id}).$promise;
+                        entity: ['Album', function(Album) {
+                            return Album.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -144,7 +147,7 @@
                 });
             }]
         })
-        .state('page.delete', {
+        .state('album.delete', {
             parent: 'dashboard',
             url: '/{id}/delete',
             data: {
@@ -152,17 +155,17 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/page/page-delete-dialog.html',
-                    controller: 'PageDeleteController',
+                    templateUrl: 'app/entities/album/album-delete-dialog.html',
+                    controller: 'AlbumDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
                         translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                            $translatePartialLoader.addPart('page');
+                            $translatePartialLoader.addPart('album');
                             return $translate.refresh();
                         }],
-                        entity: ['Page', function(Page) {
-                            return Page.get({id : $stateParams.id}).$promise;
+                        entity: ['Album', function(Album) {
+                            return Album.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {

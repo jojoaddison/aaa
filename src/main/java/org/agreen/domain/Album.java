@@ -11,11 +11,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
- * A Page.
+ * A Album.
  */
 
-@Document(collection = "page")
-public class Page implements Serializable {
+@Document(collection = "album")
+public class Album implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,18 +25,18 @@ public class Page implements Serializable {
     @Field("name")
     private String name;
 
-    @Field("lang")
-    private String lang;
-    
-    @Field("title")
-    private String title;
+    @Field("url")
+    private String url;
 
-    @Field("content")
-    private String content;
+    @Field("description")
+    private String description;
 
-    @Field("links")
-    private Set<String> links = new HashSet<>();
-    
+    @Field("photos")
+    private Set<String> photos = new HashSet<>();
+
+    @Field("is_default")
+    private boolean isDefault = false;
+
     @Field("created")
     private ZonedDateTime createdDate;
 
@@ -51,14 +51,6 @@ public class Page implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getName() {
         return name;
     }
@@ -67,28 +59,36 @@ public class Page implements Serializable {
         this.name = name;
     }
 
-    public String getLang() {
-        return lang;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLang(String lang) {
-        this.lang = lang;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getContent() {
-        return content;
+    public String getDescription() {
+        return description;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Set<String> getLink() {
-        return links;
+    public Set<String> getPhotos() {
+        return photos;
     }
 
-    public void setLink(Set<String> link) {
-        this.links = link;
+    public void setPhotos(Set<String> photos) {
+        this.photos = photos;
+    }
+
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean isDefault) {
+        this.isDefault = isDefault;
     }
 
     public ZonedDateTime getCreatedDate() {
@@ -115,11 +115,11 @@ public class Page implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Page page = (Page) o;
-        if(page.id == null || id == null) {
+        Album album = (Album) o;
+        if(album.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, page.id);
+        return Objects.equals(id, album.id);
     }
 
     @Override
@@ -129,11 +129,15 @@ public class Page implements Serializable {
 
     @Override
     public String toString() {
-        return "Page{" +
+        return "Album{" +
             "id=" + id +
-            ", title='" + title + "'" +
-            ", content='" + content + "'" +
-            ", links=" + links + 
+            ", name='" + name + "'" +
+            ", url='" + url + "'" +
+            ", description='" + description + "'" +
+            ", photos='" + photos + "'" +
+            ", isDefault='" + isDefault + "'" +
+            ", created='" + createdDate + "'" +
+            ", modified='" + modifiedDate + "'" +
             '}';
     }
 }

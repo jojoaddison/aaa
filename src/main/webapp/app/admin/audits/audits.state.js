@@ -16,6 +16,11 @@
                 pageTitle: 'audits.title'
             },
             views: {
+                'header@': {
+                    templateUrl: 'app/admin/dashboard/db.header.html',
+                    controller: 'DashboardController',
+                    controllerAs: 'vm'
+                },
                 'content@': {
                     templateUrl: 'app/admin/audits/audits.html',
                     controller: 'AuditsController',

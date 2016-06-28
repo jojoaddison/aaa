@@ -9,12 +9,12 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-            .state('user-management', {
+            .state('dashboard', {
                 parent: 'admin',
-                url: '/user-management',
+                url: '/dashboard',
                 data: {
                     authorities: ['ROLE_ADMIN'],
-                    pageTitle: 'user-management.home.title'
+                    pageTitle: 'dashboard.home.title'
                 },
                 views: {
                     'header@': {
@@ -23,49 +23,56 @@
                         controllerAs: 'vm'
                     },
                     'content@': {
-                        templateUrl: 'app/admin/user-management/user-management.html',
-                        controller: 'UserManagementController',
+                        templateUrl: 'app/admin/dashboard/db.home.html',
+                        controller: 'DashboardDetailController',
                         controllerAs: 'vm'
                     }
+                    /*,
+                    'footer@': {
+                        templateUrl: 'app/home/footer.html',
+                        controller: 'FooterController',
+                        controllerAs: 'vm'
+                    }*/
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('user-management');
+                        $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
                 }
             })
-            .state('user-management-detail', {
+            /**
+            .state('dashboard-detail', {
                 parent: 'admin',
-                url: '/user/:login',
+                url: '/dashboard/:login',
                 data: {
                     authorities: ['ROLE_ADMIN'],
-                    pageTitle: 'user-management.detail.title'
+                    pageTitle: 'dashboard.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/admin/user-management/user-management-detail.html',
-                        controller: 'UserManagementDetailController',
+                        templateUrl: 'app/admin/dashboard/dashboard-detail.html',
+                        controller: 'DashboardDetailController',
                         controllerAs: 'vm'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('user-management');
+                        $translatePartialLoader.addPart('dashboard');
                         return $translate.refresh();
                     }]
                 }
             })
-            .state('user-management.new', {
-                parent: 'user-management',
+            .state('dashboard.new', {
+                parent: 'dashboard',
                 url: '/new',
                 data: {
                     authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'app/admin/user-management/user-management-dialog.html',
-                        controller: 'UserManagementDialogController',
+                        templateUrl: 'app/admin/dashboard/dashboard-dialog.html',
+                        controller: 'DashboardDialogController',
                         controllerAs: 'vm',
                         backdrop: 'static',
                         size: 'lg',
@@ -80,22 +87,22 @@
                             }
                         }
                     }).result.then(function() {
-                            $state.go('user-management', null, { reload: true });
+                            $state.go('dashboard', null, { reload: true });
                         }, function() {
-                            $state.go('user-management');
+                            $state.go('dashboard');
                         });
                 }]
             })
-            .state('user-management.edit', {
-                parent: 'user-management',
+            .state('dashboard.edit', {
+                parent: 'dashboard',
                 url: '/{login}/edit',
                 data: {
                     authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'app/admin/user-management/user-management-dialog.html',
-                        controller: 'UserManagementDialogController',
+                        templateUrl: 'app/admin/dashboard/dashboard-dialog.html',
+                        controller: 'DashboardDialogController',
                         controllerAs: 'vm',
                         backdrop: 'static',
                         size: 'lg',
@@ -105,22 +112,22 @@
                             }]
                         }
                     }).result.then(function() {
-                            $state.go('user-management', null, { reload: true });
+                            $state.go('dashboard', null, { reload: true });
                         }, function() {
                             $state.go('^');
                         });
                 }]
             })
-            .state('user-management.delete', {
-                parent: 'user-management',
+            .state('dashboard.delete', {
+                parent: 'dashboard',
                 url: '/{login}/delete',
                 data: {
                     authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'app/admin/user-management/user-management-delete-dialog.html',
-                        controller: 'UserManagementDeleteController',
+                        templateUrl: 'app/admin/dashboard/dashboard-delete-dialog.html',
+                        controller: 'DashboardDeleteController',
                         controllerAs: 'vm',
                         size: 'md',
                         resolve: {
@@ -129,11 +136,13 @@
                             }]
                         }
                     }).result.then(function() {
-                            $state.go('user-management', null, { reload: true });
+                            $state.go('dashboard', null, { reload: true });
                         }, function() {
                             $state.go('^');
                         });
                 }]
-            });
+            })
+             */
+             ;
     }
 })();

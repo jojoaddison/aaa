@@ -1,0 +1,28 @@
+{
+    "agreenApp": {
+        "album" : {
+            "home": {
+                "title": "Albums",
+                "createLabel": "Album erstellen",
+                "createOrEditLabel": "Album erstellen oder bearbeiten",
+                "search": "Suche nach Album"
+            },
+            "created": "Album erstellt mit ID {{ param }}",
+            "updated": "Album aktualisiert mit ID {{ param }}",
+            "deleted": "Album gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Album {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Album"
+            },
+            "name": "Name",
+            "url": "Url",
+            "description": "Description",
+            "photos": "Photos",
+            "isDefault": "Is Default",
+            "created": "Created",
+            "modified": "Modified"
+        }
+    }
+}

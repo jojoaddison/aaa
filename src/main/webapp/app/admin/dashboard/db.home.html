@@ -1,0 +1,42 @@
+<div class="well well-md">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="row">
+                <div class="col-md-10">
+                    <h3>Pages</h3>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-material-brown btn-xs" ui-sref="page.new">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+            </div>
+            <ul  ng-show="vm.pagesExist == true" class="nav nav-pills nav-stacked">
+                <li ng-repeat=" page in vm.pages | orderBy: page.createdDate  track by page.id" ng-click="vm.openPage(page)" class="btn btn-material-brown btn-md">
+                    {{ page.name }}
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-md-10">
+                    <h3>Gallery</h3>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-material-brown btn-xs" ui-sref="album.new">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+            </div>
+            <ul ng-show="vm.albumsExist == true" class="nav nav-pills nav-stacked">
+                <li ng-repeat=" album in vm.gallery | orderBy: album.createdDate  track by album.id" ng-click="vm.openAlbum(album)">
+                    {{ album.name }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10" ng-show="vm.page">
+
+        </div>
+        <div class="col-md-10" ng-show="vm.album">
+
+        </div>
+    </div>
+</div>

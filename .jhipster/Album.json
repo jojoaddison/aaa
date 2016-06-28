@@ -2,24 +2,24 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "title",
-            "fieldType": "String"
-        },
-        {
             "fieldName": "name",
             "fieldType": "String"
         },
         {
-            "fieldName": "lang",
+            "fieldName": "url",
             "fieldType": "String"
         },
         {
-            "fieldName": "content",
+            "fieldName": "description",
             "fieldType": "String"
         },
         {
-            "fieldName": "link",
+            "fieldName": "photos",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "isDefault",
+            "fieldType": "Boolean"
         },
         {
             "fieldName": "createdDate",
@@ -32,6 +32,6 @@
     ],
     "dto": "no",
     "service": "no",
-    "entityTableName": "page",
+    "entityTableName": "album",
     "pagination": "pager"
 }

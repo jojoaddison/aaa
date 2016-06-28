@@ -16,7 +16,7 @@
             },
             views: {
                 'header@': {
-                    templateUrl: 'app/home/blank.html',
+                    templateUrl: 'blank.html',
                     controller: 'HeaderController',
                     controllerAs: 'vm'
                 },

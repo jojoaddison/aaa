@@ -5,5 +5,6 @@
         .module('agreenApp')
         .constant('VERSION', "0.0.1")
         .constant('DEBUG_INFO_ENABLED', true)
+        .constant('SERVER', '/agreenserver')
 ;
 })();

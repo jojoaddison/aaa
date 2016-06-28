@@ -79,7 +79,7 @@
         function loadSlider(){
             Slider.get().then(function(slides){
                 slideBox.html(slides.data);
-
+                slideBox.addClass('photo-banner');
                 showEditBtn(vm.isAuthenticated);
             });
         }
