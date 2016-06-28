@@ -379,14 +379,15 @@ ui bootstrap tweaks
 #page-wrapper{
     background-color: #ffffff;
 }
-#slider{
+.photo-banner{
     width: 100%;
     height: 500px;
 }
 .main-page{
     position:relative;
     top: 5px;
-    left: 0px;
+    left: 0;
+    z-index: 99;
 }
 .editicon {
     width: 40px;
@@ -408,5 +409,15 @@ ui bootstrap tweaks
 }
 .hide{
     display: none;
+}
+
+.main-header{
+    position: relative;
+    left: 0;
+    top: 150px;
+    width: 100%;
+    height: 100px;
+    z-index: 100;
+    margin: 0 auto;
 }
 /* jhipster-needle-css-add-main JHipster will add new css style */
