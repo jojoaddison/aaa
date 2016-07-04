@@ -2,7 +2,8 @@
     'use strict';
     angular
         .module('agreenApp')
-        .factory('Page', Page);
+        .factory('Page', Page)
+        .factory('PageService', PageService);
 
     Page.$inject = ['$resource'];
 
@@ -23,4 +24,20 @@
             'update': { method:'PUT' }
         });
     }
+
+    PageService.$inject = ['$http'];
+
+    function PageService($http){
+        return{
+            getWithLang: function(name, lang){
+                var url = "api/pages/search/" + name + "/" + lang;
+                return $http.get(url);
+            },
+            getByName: function(name){
+                var url = "api/pages/search/by-name/" + name;
+                return $http.get(url);
+            }
+        }
+    }
+
 })();

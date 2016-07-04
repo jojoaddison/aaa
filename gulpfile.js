@@ -37,7 +37,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('copy', function () {
-    return es.merge( 
+    return es.merge(
         gulp.src(config.app + 'i18n/**')
         .pipe(plumber({errorHandler: handleErrors}))
         .pipe(changed(config.dist + 'i18n/'))
@@ -170,7 +170,8 @@ gulp.task('ngconstant:dev', function () {
         name: 'agreenApp',
         constants: {
             VERSION: util.parseVersion(),
-            DEBUG_INFO_ENABLED: true
+            DEBUG_INFO_ENABLED: true,
+            SERVER: 'agreenserver/'
         },
         template: config.constantTemplate,
         stream: true
@@ -184,7 +185,8 @@ gulp.task('ngconstant:prod', function () {
         name: 'agreenApp',
         constants: {
             VERSION: util.parseVersion(),
-            DEBUG_INFO_ENABLED: false
+            DEBUG_INFO_ENABLED: false,
+            SERVER: 'agreenserver/'
         },
         template: config.constantTemplate,
         stream: true

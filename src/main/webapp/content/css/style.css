@@ -247,7 +247,7 @@ body.patt5{
 }
 
 .row {
-    margin-bottom: 80px;
+   /* margin-bottom: 80px;*/
 }
 .row-equal-height {
     display: table;

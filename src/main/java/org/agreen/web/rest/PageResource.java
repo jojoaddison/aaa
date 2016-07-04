@@ -104,7 +104,47 @@ public class PageResource {
     }
 
     /**
-     * GET  /pages/:id : get the "id" page.
+     * GET  /pages/search/:lang/:name : get the "id" page.
+     *
+     * @param id the id of the page to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the page, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/pages/search/by-name/{name}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Page>> getPagesByName(@PathVariable String name) {
+        log.debug("REST request to get Pages by name : {}", name);
+        List<Page> page = pageRepository.findAllByName(name);
+        return Optional.ofNullable(page)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    
+    /**
+     * GET  /pages/search/:lang/:name : get the "id" page.
+     *
+     * @param id the id of the page to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the page, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/pages/search/{lang}/{name}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Page> getPageByNameAndLang(@PathVariable String lang, @PathVariable String name) {
+        log.debug("REST request to get Page : {} {}", lang, name);
+        Page page = pageRepository.findOneByLangAndName(lang, name);
+        return Optional.ofNullable(page)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * GET  /pages/:name : get the "id" page.
      *
      * @param id the id of the page to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the page, or with status 404 (Not Found)

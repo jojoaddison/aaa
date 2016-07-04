@@ -99,13 +99,15 @@
     /**
      * Dashboard Detail Controller
      **/
-    DashboardDetailController.$inject = ['Page', 'Album'];
+    DashboardDetailController.$inject = ['Page', 'Album', 'PageService'];
 
-    function DashboardDetailController (Page, Album) {
+    function DashboardDetailController (Page, Album, PageService) {
         var vm = this;
         vm.pagesExist = true;
         vm.pages = [
             {
+                id: 1,
+                pid: 'association',
                 name: "Association",
                 title: "About the Association",
                 content: "Ipsum lopsum docum lotum lopsum",
@@ -116,11 +118,49 @@
                     }
                 ],
                 lang: "en"
+            },
+            {
+                id: 2,
+                pid: 'association',
+                name: "Association",
+                title: "Über der Verrein",
+                content: "Ipsum lopsum docum lotum lopsum",
+                links: [
+                    {
+                        name: "Association",
+                        href: "association"
+                    }
+                ],
+                lang: "de"
+            },
+            {
+                id: 3,
+                pid: 'association',
+                name: "Association",
+                title: "French version of Association",
+                content: "Ipsum lopsum docum lotum lopsum",
+                links: [
+                    {
+                        name: "Association",
+                        href: "association"
+                    }
+                ],
+                lang: "fr"
             }
         ];
-        vm.page = null;
+        vm.page = [];
         vm.openPage = openPage;
         vm.clearPage = clearPage;
+        vm.openLang = openLang;
+        vm.article = null;
+        vm.articles = {};
+        vm.savePage = savePage;
+        vm.cancelPage = cancelPage;
+        vm.deletePage = deletePage;
+
+        vm.link = {name: null, href: null};
+        vm.addPageLink = addPageLink;
+        vm.delPageLink = delPageLink;
 
         vm.albumsExist = true;
         vm.gallery = [];
@@ -128,9 +168,72 @@
         vm.openAlbum = openAlbum;
         vm.clearAlbum = clearAlbum;
 
+        vm.lang = 'en';
+
+        vm.tinymceOptions = {
+            plugins: 'code',
+            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+        };
+
         loadGallery();
 
         loadPages();
+
+
+        function addPageLink(){
+            vm.article.links.push(vm.link);
+            clearPageLink();
+        }
+
+        function clearPageLink(){
+            vm.link = {name: null, href: null};
+        }
+
+        function delPageLink(index){
+            vm.article.links.splice(index, 1);
+        }
+
+        function savePage(){
+            angular.forEach(vm.page, function(page){
+                if(page.id){
+                    Page.update(page);
+                }else{
+                    Page.save(page);
+                }
+            });
+        }
+
+        function cancelPage(){
+
+        }
+
+        function deletePage(){
+
+        }
+
+        function openLang(lang){
+
+            vm.lang = lang;
+            var article = null;
+
+            angular.forEach(vm.page, function(p){
+                if(p.lang == lang){
+                    article = p;
+                }
+            });
+
+            if(article == null){
+                PageService.getWithLang(vm.article.name, lang).then(function(result){
+                    article = result;
+                    vm.page.push(result);
+                });
+            }
+
+            if(article){
+                vm.article = article;
+            }
+
+        }
 
         function openAlbum(album){
             vm.album = album;
@@ -139,6 +242,7 @@
 
         function openPage(page){
             vm.page = page;
+            openLang(vm.lang);
             clearAlbum();
         }
 
@@ -152,9 +256,18 @@
 
         function loadPages(){
             Page.query(function(result){
-                vm.pages = result;
+                if(result && result.length > 0){
+                    vm.pages = result;
+                }
                 vm.pagesExist = vm.pages.length > 0;
             });
+
+            angular.forEach(vm.pages, function(page){
+                if(!vm.articles[page.name]){
+                    vm.articles[page.name] = [];
+                }
+                vm.articles[page.name].push(page);
+            })
         }
 
         function loadGallery(){

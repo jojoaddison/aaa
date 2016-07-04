@@ -3,9 +3,9 @@
 
     angular
         .module('agreenApp', [
-            'ngStorage', 
+            'ngStorage',
             'tmh.dynamicLocale',
-            'pascalprecht.translate', 
+            'pascalprecht.translate',
             'ngResource',
             'ngCookies',
             'ngAria',
@@ -14,6 +14,7 @@
             'ui.bootstrap',
             'ui.bootstrap.datetimepicker',
             'ui.router',
+            'ui.tinymce',
             'infinite-scroll',
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar'
