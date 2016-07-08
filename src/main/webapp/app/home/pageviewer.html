@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                {{ vm.page.title }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ vm.page.content }}
+        </div>
+    </div>
+    <div class="row">
+        {{ vm.page | json }}
+    </div>
+</div>
