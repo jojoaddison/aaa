@@ -104,56 +104,15 @@
     function DashboardDetailController (Page, Album, PageService) {
         var vm = this;
         vm.pagesExist = true;
-        vm.pages = [
-            {
-                id: 1,
-                pid: 'association',
-                name: "Association",
-                title: "About the Association",
-                content: "Ipsum lopsum docum lotum lopsum",
-                links: [
-                    {
-                        name: "Association",
-                        href: "association"
-                    }
-                ],
-                lang: "en"
-            },
-            {
-                id: 2,
-                pid: 'association',
-                name: "Association",
-                title: "Über der Verrein",
-                content: "Ipsum lopsum docum lotum lopsum",
-                links: [
-                    {
-                        name: "Association",
-                        href: "association"
-                    }
-                ],
-                lang: "de"
-            },
-            {
-                id: 3,
-                pid: 'association',
-                name: "Association",
-                title: "French version of Association",
-                content: "Ipsum lopsum docum lotum lopsum",
-                links: [
-                    {
-                        name: "Association",
-                        href: "association"
-                    }
-                ],
-                lang: "fr"
-            }
-        ];
+        vm.pages = [];
         vm.page = [];
+        vm.pageIndex = 0;
         vm.openPage = openPage;
         vm.clearPage = clearPage;
         vm.openLang = openLang;
         vm.article = null;
         vm.articles = {};
+        vm.newPage = newPage;
         vm.savePage = savePage;
         vm.cancelPage = cancelPage;
         vm.deletePage = deletePage;
@@ -180,6 +139,39 @@
         loadPages();
 
 
+        function newPage(){
+            vm.page = [
+                {
+                    lang: "en",
+                    pid: null,
+                    id: null,
+                    title: null,
+                    name: null,
+                    content: null,
+                    links: []
+                },
+                {
+                    lang: "fr",
+                    pid: null,
+                    id: null,
+                    title: null,
+                    name: null,
+                    content: null,
+                    links: []
+                },
+                {
+                    lang: "de",
+                    pid: null,
+                    id: null,
+                    title: null,
+                    name: null,
+                    content: null,
+                    links: []
+                }
+            ];
+            openLang(vm.lang);
+        }
+
         function addPageLink(){
             vm.article.links.push(vm.link);
             clearPageLink();
@@ -201,35 +193,57 @@
                     Page.save(page);
                 }
             });
+            loadPages();
         }
 
         function cancelPage(){
-
+            vm.article = null;
         }
 
         function deletePage(){
-
+            angular.forEach(vm.page, function(page){
+                Page.delete({id: page.id});
+            });
         }
 
         function openLang(lang){
 
             vm.lang = lang;
             var article = null;
+            var pid = null;
 
-            angular.forEach(vm.page, function(p){
+            angular.forEach(vm.page, function(p, k){
+                if(p.pid != null){
+                    pid = p.pid;
+                }
                 if(p.lang == lang){
                     article = p;
+                    vm.pageIndex = k;
                 }
             });
 
             if(article == null){
-                PageService.getWithLang(vm.article.name, lang).then(function(result){
+                PageService.getWithLang(vm.article.pid, lang).then(function(result){
                     article = result;
                     vm.page.push(result);
                 });
             }
 
             if(article){
+                if(vm.article != null && vm.article.pid != null){
+                    article.pid = vm.article.pid;
+
+                    for(var i in vm.page){
+                        var p = vm.page[i];
+                        if(p.lang == vm.article.lang){
+                            p.content = vm.article.content;
+                            break;
+                        }
+                    }
+                }
+                if(article.pid == null){
+                    article.pid = pid;
+                }
                 vm.article = article;
             }
 
@@ -260,14 +274,15 @@
                     vm.pages = result;
                 }
                 vm.pagesExist = vm.pages.length > 0;
+
+                angular.forEach(vm.pages, function(page){
+                    if(!vm.articles[page.pid]){
+                        vm.articles[page.pid] = [];
+                    }
+                    vm.articles[page.pid].push(page);
+                });
             });
 
-            angular.forEach(vm.pages, function(page){
-                if(!vm.articles[page.name]){
-                    vm.articles[page.name] = [];
-                }
-                vm.articles[page.name].push(page);
-            })
         }
 
         function loadGallery(){

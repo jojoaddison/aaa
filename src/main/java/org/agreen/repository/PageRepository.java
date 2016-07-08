@@ -15,4 +15,6 @@ public interface PageRepository extends MongoRepository<Page,String> {
 
 	List<Page> findAllByName(String name);
 
+	Page findOneByPid(String pid);
+
 }

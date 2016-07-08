@@ -36,6 +36,10 @@
             getByName: function(name){
                 var url = "api/pages/search/by-name/" + name;
                 return $http.get(url);
+            },
+            getByPid: function(pid){
+                var url = "api/pages/search/by-pid/" + pid;
+                return $http.get(url);
             }
         }
     }
