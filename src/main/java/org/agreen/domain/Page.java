@@ -22,6 +22,9 @@ public class Page implements Serializable {
     @Id
     private String id;
 
+    @Field("pid")
+    private String pid;
+    
     @Field("name")
     private String name;
 
@@ -38,10 +41,10 @@ public class Page implements Serializable {
     private Set<String> links = new HashSet<>();
     
     @Field("created")
-    private ZonedDateTime createdDate;
+    private ZonedDateTime createdDate = ZonedDateTime.now();
 
     @Field("modified")
-    private ZonedDateTime modifiedDate;
+    private ZonedDateTime modifiedDate = ZonedDateTime.now();
 
     public String getId() {
         return id;
@@ -65,6 +68,14 @@ public class Page implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 
     public String getLang() {
