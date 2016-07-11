@@ -1,9 +1,14 @@
 package org.agreen.config;
 
-import org.agreen.security.*;
-import org.agreen.web.filter.CsrfCookieGeneratorFilter;
-import org.agreen.config.JHipsterProperties;
+import javax.inject.Inject;
 
+import org.agreen.security.AjaxAuthenticationFailureHandler;
+import org.agreen.security.AjaxAuthenticationSuccessHandler;
+import org.agreen.security.AjaxLogoutSuccessHandler;
+import org.agreen.security.AuthoritiesConstants;
+import org.agreen.security.CustomAccessDeniedHandler;
+import org.agreen.security.Http401UnauthorizedEntryPoint;
+import org.agreen.web.filter.CsrfCookieGeneratorFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,14 +19,11 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
-
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.csrf.CsrfFilter;
-
-import javax.inject.Inject;
 
 @Configuration
 @EnableWebSecurity
@@ -109,6 +111,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()
+            .antMatchers("/api/pages/search/**").permitAll()
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/account/reset_password/init").permitAll()
             .antMatchers("/api/account/reset_password/finish").permitAll()

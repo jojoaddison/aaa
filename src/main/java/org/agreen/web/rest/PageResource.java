@@ -153,10 +153,10 @@ public class PageResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Page> getPageByPid(@PathVariable String pid) {
+    public ResponseEntity<List<Page>> getPageByPid(@PathVariable String pid) {
         log.debug("REST request to get Page by pid : {}", pid);
-        Page page = pageRepository.findOneByPid(pid);
-        return Optional.ofNullable(page)
+        List<Page> pages = pageRepository.findAllByPid(pid);
+        return Optional.ofNullable(pages)
             .map(result -> new ResponseEntity<>(
                 result,
                 HttpStatus.OK))

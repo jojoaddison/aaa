@@ -59,13 +59,17 @@
         ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>-->
 
-    <!-- build:js app/vendor.js -->
-    <!-- bower:js -->
+    <!-- correct tinymce script sources
+		<script src="bower_components/tinymce-dist/tinymce.js"></script>
+		<script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+
+    <!-- build:js app/vendor.js -->
+    <!-- bower:js -->
     <script src="bower_components/messageformat/messageformat.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
-    <script src="bower_components/angular-revolution/release/angular-revolution.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
@@ -86,14 +90,15 @@
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
     <script src="bower_components/angular-bootstrap-material/angular-bootstrap-material.min.js"></script>
-    <script src="bower_components/tinymce-dist/tinymce.js"></script>
-    <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="bower_components/angular-revolution/release/angular-revolution.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 
+    <script src="bower_components/tinymce-dist/tinymce.js"></script>
+    <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="bower_components/angular-revolution/release/angular-revolution.js"></script>
     <script src="content/rs/js/jquery.themepunch.tools.min.js"></script><!-- Revolution slider script -->
     <script src="content/rs/js/jquery.themepunch.revolution.min.js"></script><!-- Revolution slider script -->
-    <script src="bower_components/angular-revolution/release/angular-revolution.js"></script>
 
     <!-- build:js app/app.js  -->
     <!-- inject:js -->
@@ -117,11 +122,12 @@
     <script src="app/layouts/navbar/active-menu.directive.js"></script>
     <script src="app/layouts/navbar/active-link.directive.js"></script>
     <script src="app/layouts/error/error.state.js"></script>
+    <script src="app/home/pageviewer.state.js"></script>
+    <script src="app/home/pageviewer.state.bak.js"></script>
+    <script src="app/home/pageviewer.controller.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.service.js"></script>
     <script src="app/home/home.controller.js"></script>
-    <script src="app/home/pageviewer.controller.js"></script>
-    <script src="app/home/pageviewer.state.js"></script>
     <script src="app/entities/page/page-dialog.controller.js"></script>
     <script src="app/entities/page/page-detail.controller.js"></script>
     <script src="app/entities/page/page-delete-dialog.controller.js"></script>

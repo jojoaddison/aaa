@@ -10,27 +10,35 @@
     function stateConfig($stateProvider) {
         $stateProvider.state('pageviewer', {
                 parent: 'app',
-                url: '/{pid}',
+                url: 'page/{pid}',
                 data: {
                     authorities: [],
                     pageTitle: 'agreenApp.page.detail.title'
                 },
-                views: {
-                    'content@': {
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
                         templateUrl: 'app/home/pageviewer.html',
                         controller: 'PageViewerController',
-                        controllerAs: 'vm'
-                    }
-                },
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('page');
-                        return $translate.refresh();
-                    }],
-                    entity: ['$stateParams', 'PageService', function ($stateParams, PageService) {
-                        return PageService.getByPid({pid: $stateParams.pid}).$promise;
-                    }]
-                }
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                                $translatePartialLoader.addPart('page');
+                                return $translate.refresh();
+                            }],
+                            entity: ['$stateParams', 'PageService', function ($stateParams, PageService) {
+                                return PageService.getByPid($stateParams.pid).then(function(result){
+                                    return result.data;
+                                });
+                            }]
+                        }
+                    }).result.then(function() {
+                            $state.go('home', null, { reload: true });
+                        }, function() {
+                            $state.go('home');
+                        });
+                }]
             }
         );
     }
