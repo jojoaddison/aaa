@@ -8,7 +8,7 @@
     Page.$inject = ['$resource'];
 
     function Page ($resource) {
-        var resourceUrl =  'api/page/:id';
+        var resourceUrl =  'api/pages/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
