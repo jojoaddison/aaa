@@ -4,25 +4,25 @@
   "appPath": "src/main/webapp/",
   "testPath": "src/test/javascript/spec",
   "dependencies": {
-    "angular": "1.5.5",
-    "angular-aria": "1.5.5",
-    "angular-bootstrap": "1.3.3",
-    "angular-cache-buster": "0.4.3",
-    "angular-cookies": "1.5.5",
-    "angular-dynamic-locale": "0.1.32",
-    "angular-i18n": "1.5.5",
-    "ngstorage": "0.3.10",
-    "angular-loading-bar": "0.9.0",
-    "angular-resource": "1.5.5",
-    "angular-sanitize": "^1.5.7",
-    "angular-translate": "2.11.0",
-    "angular-translate-interpolation-messageformat": "2.11.0",
-    "angular-translate-loader-partial": "2.11.0",
-    "angular-translate-storage-cookie": "2.11.0",
-    "angular-ui-router": "0.3.0",
-    "bootstrap": "3.3.6",
-    "bootstrap-ui-datetime-picker": "2.3.1",
     "jquery": "2.2.4",
+    "angular": "1.5.7",
+    "angular-aria": "*",
+    "angular-bootstrap": "*",
+    "angular-cache-buster": "*",
+    "angular-cookies": "*",
+    "angular-dynamic-locale": "*",
+    "angular-i18n": "*",
+    "ngstorage": "*",
+    "angular-loading-bar": "*",
+    "angular-resource": "*",
+    "angular-sanitize": "*",
+    "angular-translate": "*",
+    "angular-translate-interpolation-messageformat": "*",
+    "angular-translate-loader-partial": "*",
+    "angular-translate-storage-cookie": "*",
+    "angular-ui-router": "*",
+    "bootstrap": "*",
+    "bootstrap-ui-datetime-picker": "*",
     "json3": "3.3.2",
     "messageformat": "0.3.1",
     "modernizr": "3.3.1",
@@ -35,22 +35,12 @@
     "angular-ui-tinymce": "^0.0.16"
   },
   "devDependencies": {
-    "angular-mocks": "1.5.5"
+    "angular-mocks": "*"
   },
   "overrides": {
     "angular": {
       "dependencies": {
         "jquery": "2.2.4"
-      }
-    },
-    "angular-cache-buster": {
-      "dependencies": {
-        "angular": "1.5.5"
-      }
-    },
-    "angular-dynamic-locale": {
-      "dependencies": {
-        "angular": "1.5.5"
       }
     },
     "bootstrap": {
@@ -60,10 +50,6 @@
     }
   },
   "resolutions": {
-    "angular": "1.5.7",
-    "angular-cookies": "1.5.5",
-    "angular-bootstrap": "1.3.3",
-    "jquery": "2.2.4",
-    "angular-sanitize": "^1.5.7"
+    "jquery": "2.2.4"
   }
 }

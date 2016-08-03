@@ -39,6 +39,7 @@
             },
             getByPid: function(pid){
                 var url = "api/pages/search/by-pid/" + pid;
+                console.log(url);
                 return $http.get(url);
             }
         }

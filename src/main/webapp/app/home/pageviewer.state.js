@@ -23,18 +23,22 @@
                         backdrop: 'static',
                         size: 'lg',
                         resolve: {
-                            translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                            translatePartialLoader: ['$translate', '$translatePartialLoader',
+                                function ($translate, $translatePartialLoader) {
                                 $translatePartialLoader.addPart('page');
                                 return $translate.refresh();
                             }],
                             entity: ['$stateParams', 'PageService', function ($stateParams, PageService) {
-                                return PageService.getByPid($stateParams.pid).then(function(result){
-                                    return result.data;
-                                });
+                                console.log("STATE_PARAMS_PID: " + JSON.stringify($stateParams));
+                                if($stateParams && $stateParams.length > 0){
+                                    return PageService.getByPid($stateParams.pid).then(function(result){
+                                        return result.data;
+                                    });
+                                }
                             }]
                         }
                     }).result.then(function() {
-                            $state.go('home', null, { reload: true });
+                            //$state.go('home', null, { reload: true });
                         }, function() {
                             $state.go('home');
                         });
