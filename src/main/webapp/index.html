@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css">
+    <link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css">
     <!-- endinject -->
     <!-- endbuild -->
     <!-- Google Web fonts -->
@@ -23,6 +24,10 @@
     <!-- Revolution slider -->
     <link rel="stylesheet" href="content/rs/css/settings.css"/><!-- .rs-settings end -->
     <link rel="stylesheet" href="content/rs/css/mixed.css"/><!-- settings for rev slider -->
+
+    <!-- Fine uploader
+    <link href="bower_components/fine-uploader/client/fine-uploader-gallery.css" rel="stylesheet">
+    -->
 
     <!-- custom css -->
     <link rel="stylesheet" href="content/css/color-default.css">
@@ -66,10 +71,12 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
+    <script src="bower_components/tinymce-dist/tinymce.js"></script>
+    <script src="content/rs/js/jquery.themepunch.tools.min.js"></script><!-- Revolution slider script -->
+    <script src="content/rs/js/jquery.themepunch.revolution.min.js"></script><!-- Revolution slider script -->
+
     <!-- build:js app/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
@@ -91,17 +98,14 @@
     <script src="bower_components/angular-revolution/release/angular-revolution.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+    <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="bower_components/angular-dropzone/lib/angular-dropzone.js"></script>
     <script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
     <script src="bower_components/angular-bootstrap-material/angular-bootstrap-material.min.js"></script>
     <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 
-    <script src="bower_components/tinymce-dist/tinymce.js"></script>
-    <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
-    <script src="bower_components/angular-revolution/release/angular-revolution.js"></script>
-    <script src="content/rs/js/jquery.themepunch.tools.min.js"></script><!-- Revolution slider script -->
-    <script src="content/rs/js/jquery.themepunch.revolution.min.js"></script><!-- Revolution slider script -->
 
     <!-- build:js app/app.js  -->
     <!-- inject:js -->
@@ -128,16 +132,48 @@
     <script src="app/home/pageviewer.state.js"></script>
     <script src="app/home/pageviewer.state.bak.js"></script>
     <script src="app/home/pageviewer.controller.js"></script>
+    <script src="app/home/link.manager.state.js"></script>
+    <script src="app/home/link.manager.service.js"></script>
+    <script src="app/home/link.manager.controller.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.service.js"></script>
     <script src="app/home/home.controller.js"></script>
+    <script src="app/home/gallery.manager.state.js"></script>
+    <script src="app/home/gallery.manager.service.js"></script>
+    <script src="app/home/gallery.manager.controller.js"></script>
+    <script src="app/entities/project/project-dialog.controller.js"></script>
+    <script src="app/entities/project/project-detail.controller.js"></script>
+    <script src="app/entities/project/project-delete-dialog.controller.js"></script>
+    <script src="app/entities/project/project.state.js"></script>
+    <script src="app/entities/project/project.service.js"></script>
+    <script src="app/entities/project/project.controller.js"></script>
+    <script src="app/entities/photo/photo-dialog.controller.js"></script>
+    <script src="app/entities/photo/photo-detail.controller.js"></script>
+    <script src="app/entities/photo/photo-delete-dialog.controller.js"></script>
+    <script src="app/entities/photo/photo.state.js"></script>
+    <script src="app/entities/photo/photo.service.js"></script>
+    <script src="app/entities/photo/photo.controller.js"></script>
     <script src="app/entities/page/page-dialog.controller.js"></script>
     <script src="app/entities/page/page-detail.controller.js"></script>
     <script src="app/entities/page/page-delete-dialog.controller.js"></script>
     <script src="app/entities/page/page.state.js"></script>
     <script src="app/entities/page/page.service.js"></script>
     <script src="app/entities/page/page.controller.js"></script>
+    <script src="app/entities/media/media-file.directive.js"></script>
+    <script src="app/entities/media/media-file.controller.js"></script>
+    <script src="app/entities/media/media-dialog.controller.js"></script>
+    <script src="app/entities/media/media-detail.controller.js"></script>
+    <script src="app/entities/media/media-delete-dialog.controller.js"></script>
+    <script src="app/entities/media/media.state.js"></script>
+    <script src="app/entities/media/media.service.js"></script>
+    <script src="app/entities/media/media.controller.js"></script>
     <script src="app/entities/entity.state.js"></script>
+    <script src="app/entities/blog/blog-dialog.controller.js"></script>
+    <script src="app/entities/blog/blog-detail.controller.js"></script>
+    <script src="app/entities/blog/blog-delete-dialog.controller.js"></script>
+    <script src="app/entities/blog/blog.state.js"></script>
+    <script src="app/entities/blog/blog.service.js"></script>
+    <script src="app/entities/blog/blog.controller.js"></script>
     <script src="app/entities/album/album-dialog.controller.js"></script>
     <script src="app/entities/album/album-detail.controller.js"></script>
     <script src="app/entities/album/album-delete-dialog.controller.js"></script>

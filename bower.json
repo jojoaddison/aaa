@@ -32,7 +32,10 @@
     "angular-revolution": "^1.0.0",
     "angular-bootstrap-material": "*",
     "tinymce": "^4.3.13",
-    "angular-ui-tinymce": "^0.0.16"
+    "angular-ui-tinymce": "^0.0.16",
+    "fine-uploader": "^5.11.5",
+    "dropzone": "^4.3.0",
+    "angular-dropzone": "^0.1.2"
   },
   "devDependencies": {
     "angular-mocks": "*"
@@ -50,6 +53,7 @@
     }
   },
   "resolutions": {
-    "jquery": "2.2.4"
+    "jquery": "2.2.4",
+    "dropzone": "^4.3.0"
   }
 }

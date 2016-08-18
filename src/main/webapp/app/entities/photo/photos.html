@@ -1,0 +1,72 @@
+<div>
+    <h2 translate="agreenApp.photo.home.title">Photos</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="photo.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="agreenApp.photo.home.createLabel">
+                        Create new Photo
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="agreenApp.photo.name">Name</span></th>
+                    <th><span translate="agreenApp.photo.url">Url</span></th>
+                    <th><span translate="agreenApp.photo.createdDate">Created Date</span></th>
+                    <th><span translate="agreenApp.photo.tags">Tags</span></th>
+                    <th><span translate="agreenApp.photo.comments">Comments</span></th>
+                    <th><span translate="agreenApp.photo.description">Description</span></th>
+                    <th><span translate="agreenApp.photo.modifiedDate">Modified Date</span></th>
+                    <th><span translate="agreenApp.photo.thumb">Thumb</span></th>
+                    <th><span translate="agreenApp.photo.type">Type</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="photo in vm.photos track by photo.id">
+                    <td><a ui-sref="photo-detail({id:photo.id})">{{photo.id}}</a></td>
+                    <td>{{photo.name}}</td>
+                    <td>{{photo.url}}</td>
+                    <td>{{photo.createdDate | date:'medium'}}</td>
+                    <td>{{photo.tags}}</td>
+                    <td>{{photo.comments}}</td>
+                    <td>{{photo.description}}</td>
+                    <td>{{photo.modifiedDate | date:'medium'}}</td>
+                    <td>{{photo.thumb}}</td>
+                    <td>{{photo.type}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="photo-detail({id:photo.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="photo.edit({id:photo.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="photo.delete({id:photo.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

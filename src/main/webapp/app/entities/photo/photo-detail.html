@@ -1,0 +1,50 @@
+
+<div>
+    <h2><span translate="agreenApp.photo.detail.title">Photo</span> {{vm.photo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="agreenApp.photo.name">Name</span></dt>
+        <dd>
+            <span>{{vm.photo.name}}</span>
+        </dd>
+        <dt><span translate="agreenApp.photo.url">Url</span></dt>
+        <dd>
+            <span>{{vm.photo.url}}</span>
+        </dd>
+        <dt><span translate="agreenApp.photo.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.photo.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="agreenApp.photo.tags">Tags</span></dt>
+        <dd>
+            <span>{{vm.photo.tags}}</span>
+        </dd>
+        <dt><span translate="agreenApp.photo.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.photo.comments}}</span>
+        </dd>
+        <dt><span translate="agreenApp.photo.description">Description</span></dt>
+        <dd>
+            <span>{{vm.photo.description}}</span>
+        </dd>
+        <dt><span translate="agreenApp.photo.modifiedDate">Modified Date</span></dt>
+        <dd>
+            <span>{{vm.photo.modifiedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="agreenApp.photo.thumb">Thumb</span></dt>
+        <dd>
+            <span>{{vm.photo.thumb}}</span>
+        </dd>
+        <dt><span translate="agreenApp.photo.type">Type</span></dt>
+        <dd>
+            <span>{{vm.photo.type}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

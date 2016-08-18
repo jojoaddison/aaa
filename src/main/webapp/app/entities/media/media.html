@@ -1,0 +1,84 @@
+<div>
+    <h2 translate="agreenApp.media.home.title">Media</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="media.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="agreenApp.media.home.createLabel">
+                        Create new Media
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="agreenApp.media.name">Name</span></th>
+                    <th><span translate="agreenApp.media.url">Url</span></th>
+                    <th><span translate="agreenApp.media.thumb">Thumb</span></th>
+                    <th><span translate="agreenApp.media.type">Type</span></th>
+                    <th><span translate="agreenApp.media.description">Description</span></th>
+                    <th><span translate="agreenApp.media.size">Size</span></th>
+                    <th><span translate="agreenApp.media.createdDate">Created Date</span></th>
+                    <th><span translate="agreenApp.media.modifiedDate">Modified Date</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="media in vm.media track by media.id">
+                    <td><a ui-sref="media-detail({id:media.id})">{{media.id}}</a></td>
+                    <td>{{media.name}}</td>
+                    <td>{{media.url}}</td>
+                    <td>{{media.thumb}}</td>
+                    <td>{{media.type}}</td>
+                    <td>{{media.description}}</td>
+                    <td>{{media.size}}</td>
+                    <td>{{media.createdDate | date:'medium'}}</td>
+                    <td>{{media.modifiedDate | date:'medium'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="media-detail({id:media.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="media.edit({id:media.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="media.delete({id:media.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br />
+
+    <div class="well well-md">
+        <form action="/media" ng-submit="vm.save()" class="dropzone"
+              method="post"
+              enctype="multipart/form-data"
+              ng-dropzone
+              dropzone="vm.dropzone"
+              dropzone-config="vm.dropzoneConfig"
+              event-handlers="{ 'addedfile': ctrl.dzAddedFile, 'error': ctrl.dzError }">
+        </form>
+
+    </div>
+</div>

@@ -17,6 +17,7 @@
             'ui.tinymce',
             'infinite-scroll',
             'ngSanitize',
+            'ngDropzone',
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar'
         ])

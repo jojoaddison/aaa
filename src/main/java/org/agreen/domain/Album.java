@@ -31,8 +31,8 @@ public class Album implements Serializable {
     @Field("description")
     private String description;
 
-    @Field("photos")
-    private Set<String> photos = new HashSet<>();
+    @Field("media")
+    private Set<Media> media = new HashSet<>();
 
     @Field("is_default")
     private boolean isDefault = false;
@@ -75,12 +75,12 @@ public class Album implements Serializable {
         this.description = description;
     }
 
-    public Set<String> getPhotos() {
-        return photos;
+    public Set<Media> getMedia() {
+        return media;
     }
 
-    public void setPhotos(Set<String> photos) {
-        this.photos = photos;
+    public void setPhotos(Set<Media> photos) {
+        this.media = photos;
     }
 
     public boolean isDefault() {
@@ -134,7 +134,7 @@ public class Album implements Serializable {
             ", name='" + name + "'" +
             ", url='" + url + "'" +
             ", description='" + description + "'" +
-            ", photos='" + photos + "'" +
+            ", media='" + media + "'" +
             ", isDefault='" + isDefault + "'" +
             ", created='" + createdDate + "'" +
             ", modified='" + modifiedDate + "'" +

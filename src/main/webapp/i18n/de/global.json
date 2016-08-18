@@ -13,6 +13,10 @@
                 "dashboard": "Dashboard",
                 "gallery": "Gallery",
                 "pages": "Pages",
+                "photo": "Photo",
+                "project": "Project",
+                "blog": "Blog",
+                "media": "Media",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

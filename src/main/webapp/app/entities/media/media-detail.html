@@ -1,0 +1,46 @@
+
+<div>
+    <h2><span translate="agreenApp.media.detail.title">Media</span> {{vm.media.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="agreenApp.media.name">Name</span></dt>
+        <dd>
+            <span>{{vm.media.name}}</span>
+        </dd>
+        <dt><span translate="agreenApp.media.url">Url</span></dt>
+        <dd>
+            <span>{{vm.media.url}}</span>
+        </dd>
+        <dt><span translate="agreenApp.media.thumb">Thumb</span></dt>
+        <dd>
+            <span>{{vm.media.thumb}}</span>
+        </dd>
+        <dt><span translate="agreenApp.media.type">Type</span></dt>
+        <dd>
+            <span>{{vm.media.type}}</span>
+        </dd>
+        <dt><span translate="agreenApp.media.description">Description</span></dt>
+        <dd>
+            <span>{{vm.media.description}}</span>
+        </dd>
+        <dt><span translate="agreenApp.media.size">Size</span></dt>
+        <dd>
+            <span>{{vm.media.size}}</span>
+        </dd>
+        <dt><span translate="agreenApp.media.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.media.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="agreenApp.media.modifiedDate">Modified Date</span></dt>
+        <dd>
+            <span>{{vm.media.modifiedDate | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

@@ -1,0 +1,38 @@
+
+<div>
+    <h2><span translate="agreenApp.project.detail.title">Project</span> {{vm.project.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="agreenApp.project.name">Name</span></dt>
+        <dd>
+            <span>{{vm.project.name}}</span>
+        </dd>
+        <dt><span translate="agreenApp.project.title">Title</span></dt>
+        <dd>
+            <span>{{vm.project.title}}</span>
+        </dd>
+        <dt><span translate="agreenApp.project.content">Content</span></dt>
+        <dd>
+            <span>{{vm.project.content}}</span>
+        </dd>
+        <dt><span translate="agreenApp.project.album">Album</span></dt>
+        <dd>
+            <span>{{vm.project.album}}</span>
+        </dd>
+        <dt><span translate="agreenApp.project.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.project.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="agreenApp.project.modifiedDate">Modified Date</span></dt>
+        <dd>
+            <span>{{vm.project.modifiedDate | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

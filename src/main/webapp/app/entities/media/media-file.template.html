@@ -1,0 +1,10 @@
+<div class="DemoController as ctrl">
+    <form class="dropzone"
+          method="post"
+          enctype="multipart/form-data"
+          ng-dropzone
+          dropzone="ctrl.dropzone"
+          dropzone-config="ctrl.dropzoneConfig"
+          event-handlers="{ 'addedfile': ctrl.dzAddedFile, 'error': ctrl.dzError }">
+    </form>
+</div>

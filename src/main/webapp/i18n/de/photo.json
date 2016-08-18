@@ -1,0 +1,30 @@
+{
+    "agreenApp": {
+        "photo" : {
+            "home": {
+                "title": "Photos",
+                "createLabel": "Photo erstellen",
+                "createOrEditLabel": "Photo erstellen oder bearbeiten",
+                "search": "Suche nach Photo"
+            },
+            "created": "Photo erstellt mit ID {{ param }}",
+            "updated": "Photo aktualisiert mit ID {{ param }}",
+            "deleted": "Photo gelöscht mit ID {{ param }}",
+            "delete": {
+                "question": "Soll Photo {{ id }} wirklich dauerhaft gejöscht werden?"
+            },
+            "detail": {
+                "title": "Photo"
+            },
+            "name": "Name",
+            "url": "Url",
+            "createdDate": "Created Date",
+            "tags": "Tags",
+            "comments": "Comments",
+            "description": "Description",
+            "modifiedDate": "Modified Date",
+            "thumb": "Thumb",
+            "type": "Type"
+        }
+    }
+}

@@ -33,6 +33,8 @@ public class AlbumResource {
     @Inject
     private AlbumRepository albumRepository;
     
+    
+    
     /**
      * POST  /albums : Create a new album.
      *

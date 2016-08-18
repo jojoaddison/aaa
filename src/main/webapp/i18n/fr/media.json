@@ -1,0 +1,29 @@
+{
+    "agreenApp": {
+        "media" : {
+            "home": {
+                "title": "Media",
+                "createLabel": "Créer un nouveau Media",
+                "createOrEditLabel": "Créer ou éditer un Media",
+                "search": "Recherche pour Media"
+            },
+            "created": "Un nouveau Media a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Media avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Media avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Media {{ id }} ?"
+            },
+            "detail": {
+                "title": "Media"
+            },
+            "name": "Name",
+            "url": "Url",
+            "thumb": "Thumb",
+            "type": "Type",
+            "description": "Description",
+            "size": "Size",
+            "createdDate": "Created Date",
+            "modifiedDate": "Modified Date"
+        }
+    }
+}

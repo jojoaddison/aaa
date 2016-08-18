@@ -34,12 +34,30 @@
                             <span class="hidden-sm" translate="global.menu.association">Association</span>
                         </a>
                     </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="pageviewer({ pid: 'projects' })" ng-click="vm.collapseNavbar()">
-                            <span class="glyphicon glyphicon-map-marker"></span>
+                    <li ng-class="{active: vm.$state.includes('page')}" uib-dropdown class="dropdown pointer">
+                        <a class="dropdown-toggle" uib-dropdown-toggle href="" id="projects-menu">
+                        <span>
+                             <span class="glyphicon glyphicon-map-marker"></span>
                             <span class="hidden-sm" translate="global.menu.projects">Projects</span>
+                            <b class="caret"></b>
+                        </span>
                         </a>
+                        <ul class="dropdown-menu" uib-dropdown-menu>
+                            <li ui-sref-active="active">
+                                <a class="label label-material-brown" ui-sref="pageviewer({ pid: 'projects2013' })" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                    <span class="hidden-sm">2013 Projects</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a class="label label-material-brown" ui-sref="pageviewer({ pid: 'projects2012' })" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                    <span class="hidden-sm">2012 Projects</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
                     <li ui-sref-active="active">
                         <a ui-sref="pageviewer({ pid: 'donations' })" ng-click="vm.collapseNavbar()">
                             <span class="glyphicon glyphicon-gift"></span>

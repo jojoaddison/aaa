@@ -36,6 +36,9 @@ spring:
 security:
     basic:
         enabled: false
+        
+media:
+    base: /var/www/html/agreen/galleries        
 
 # ===================================================================
 # JHipster specific properties
