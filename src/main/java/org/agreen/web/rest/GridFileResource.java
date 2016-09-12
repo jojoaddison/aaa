@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
 import org.agreen.domain.Media;
+import org.agreen.repository.MediaRepository;
 import org.agreen.web.rest.util.HeaderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Query;
@@ -29,13 +32,15 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSFile;
-import com.ning.http.util.Base64;
 
 @RestController
 @RequestMapping("/api/gridfs")
 public class GridFileResource {
 
   private final GridFsTemplate gridFsTemplate;
+  
+  @Inject
+  private MediaRepository mediaRepository;
 
   @Autowired
   public GridFileResource(GridFsTemplate gridFsTemplate) {
@@ -58,7 +63,7 @@ public class GridFileResource {
       media.setName(name);
       media.setSize(file.getSize());
       media.setType(file.getContentType());
-      
+      media = mediaRepository.save(media);
       return ResponseEntity.created(new URI("/api/gridfs/" + name))
               .headers(HeaderUtil.createEntityCreationAlert("filemedia", name))
               .body(media);
@@ -84,7 +89,7 @@ public class GridFileResource {
           created.writeTo(os);
           Media media = new Media();
           media.setBytes(os.toByteArray());
-          media.setContent(Base64.encode(os.toByteArray()));
+          media.setContent(java.util.Base64.getEncoder().encodeToString(os.toByteArray()));
           media.setName(created.getFilename());
           media.setId(created.getId().toString());
           HttpHeaders headers = new HttpHeaders();
