@@ -1,4 +1,4 @@
-<div>
+<div class="well well-md no-header mb-80">
     <h2 translate="agreenApp.media.home.title">Media</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
@@ -18,29 +18,21 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr>
-                    <th><span translate="global.field.id">ID</span></th>
-                    <th><span translate="agreenApp.media.name">Name</span></th>
-                    <th><span translate="agreenApp.media.url">Url</span></th>
                     <th><span translate="agreenApp.media.thumb">Thumb</span></th>
-                    <th><span translate="agreenApp.media.type">Type</span></th>
+                    <th><span translate="agreenApp.media.name">Name</span></th>
                     <th><span translate="agreenApp.media.description">Description</span></th>
-                    <th><span translate="agreenApp.media.size">Size</span></th>
-                    <th><span translate="agreenApp.media.createdDate">Created Date</span></th>
-                    <th><span translate="agreenApp.media.modifiedDate">Modified Date</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="media in vm.media track by media.id">
-                    <td><a ui-sref="media-detail({id:media.id})">{{media.id}}</a></td>
+                    <td class="media-img">
+                        <a ng-click="vm.previewImage(media)">
+                            <img src="data:{{media.type}};base64, {{ media.content }}" style='display:block; width:100px;height:auto'/>
+                        </a>
+                    </td>
                     <td>{{media.name}}</td>
-                    <td>{{media.url}}</td>
-                    <td>{{media.thumb}}</td>
-                    <td>{{media.type}}</td>
                     <td>{{media.description}}</td>
-                    <td>{{media.size}}</td>
-                    <td>{{media.createdDate | date:'medium'}}</td>
-                    <td>{{media.modifiedDate | date:'medium'}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -70,15 +62,10 @@
 
     <br />
 
-    <div class="well well-md">
-        <form action="/media" ng-submit="vm.save()" class="dropzone"
-              method="post"
-              enctype="multipart/form-data"
-              ng-dropzone
-              dropzone="vm.dropzone"
-              dropzone-config="vm.dropzoneConfig"
-              event-handlers="{ 'addedfile': ctrl.dzAddedFile, 'error': ctrl.dzError }">
-        </form>
-
-    </div>
+    <p>&nbsp;</p>
 </div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

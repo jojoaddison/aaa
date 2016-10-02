@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.css">
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css">
     <link rel="stylesheet" href="bower_components/dropzone/dist/min/dropzone.min.css">
+    <link rel="stylesheet" href="bower_components/ng-img-crop/compile/minified/ng-img-crop.css">
     <!-- endinject -->
     <!-- endbuild -->
     <!-- Google Web fonts -->
@@ -72,10 +73,11 @@
     <script src="bower_components/angular/angular.js"></script>
 
     <script src="bower_components/tinymce-dist/tinymce.js"></script>
+    <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
     <script src="content/rs/js/jquery.themepunch.tools.min.js"></script><!-- Revolution slider script -->
     <script src="content/rs/js/jquery.themepunch.revolution.min.js"></script><!-- Revolution slider script -->
 
-    <!-- build:js app/vendor.js -->
+    <!-- build:js app/vendor-remove.js -->
     <!-- bower:js -->
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -100,6 +102,8 @@
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
     <script src="bower_components/dropzone/dist/min/dropzone.min.js"></script>
     <script src="bower_components/angular-dropzone/lib/angular-dropzone.js"></script>
+    <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
     <script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
     <script src="bower_components/angular-bootstrap-material/angular-bootstrap-material.min.js"></script>
     <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
@@ -166,6 +170,7 @@
     <script src="app/entities/media/media-delete-dialog.controller.js"></script>
     <script src="app/entities/media/media.state.js"></script>
     <script src="app/entities/media/media.service.js"></script>
+    <script src="app/entities/media/media.directive.js"></script>
     <script src="app/entities/media/media.controller.js"></script>
     <script src="app/entities/entity.state.js"></script>
     <script src="app/entities/blog/blog-dialog.controller.js"></script>
@@ -174,6 +179,13 @@
     <script src="app/entities/blog/blog.state.js"></script>
     <script src="app/entities/blog/blog.service.js"></script>
     <script src="app/entities/blog/blog.controller.js"></script>
+    <script src="app/entities/article/article-dialog.controller.js"></script>
+    <script src="app/entities/article/article-detail.controller.js"></script>
+    <script src="app/entities/article/article-delete-dialog.controller.js"></script>
+    <script src="app/entities/article/article-create.controller.js"></script>
+    <script src="app/entities/article/article.state.js"></script>
+    <script src="app/entities/article/article.service.js"></script>
+    <script src="app/entities/article/article.controller.js"></script>
     <script src="app/entities/album/album-dialog.controller.js"></script>
     <script src="app/entities/album/album-detail.controller.js"></script>
     <script src="app/entities/album/album-delete-dialog.controller.js"></script>
@@ -237,6 +249,7 @@
     <script src="app/admin/health/health.controller.js"></script>
     <script src="app/admin/docs/docs.state.js"></script>
     <script src="app/admin/dashboard/db.state.js"></script>
+    <script src="app/admin/dashboard/db.service.js"></script>
     <script src="app/admin/dashboard/db.directives.js"></script>
     <script src="app/admin/dashboard/db.controller.js"></script>
     <script src="app/admin/configuration/configuration.state.js"></script>

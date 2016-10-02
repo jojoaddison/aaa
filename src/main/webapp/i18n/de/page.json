@@ -16,10 +16,12 @@
             "detail": {
                 "title": "Page"
             },
-            "title": "Title",
+            "pid": "PID",
+            "lang": "Sprache",
+            "title": "Thema",
             "name": "Name",
-            "content": "Content",
-            "link": "Link"
+            "content": "Inhalt",
+            "link": "Verlinkungen"
         }
     }
 }

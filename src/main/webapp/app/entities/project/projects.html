@@ -1,22 +1,7 @@
-<div>
-    <h2 translate="agreenApp.project.home.title">Projects</h2>
-    <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="project.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  translate="agreenApp.project.home.createLabel">
-                        Create new Project
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
+    <div class="container well well-md">
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
                 <tr>
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="agreenApp.project.name">Name</span></th>
@@ -27,8 +12,8 @@
                     <th><span translate="agreenApp.project.modifiedDate">Modified Date</span></th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr ng-repeat="project in vm.projects track by project.id">
                     <td><a ui-sref="project-detail({id:project.id})">{{project.id}}</a></td>
                     <td>{{project.name}}</td>
@@ -60,7 +45,8 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+

@@ -29,7 +29,6 @@
                                 return $translate.refresh();
                             }],
                             entity: ['$stateParams', 'PageService', function ($stateParams, PageService) {
-                                console.log("STATE_PARAMS_PID: " + JSON.stringify($stateParams));
                                 if($stateParams && $stateParams.length > 0){
                                     return PageService.getByPid($stateParams.pid).then(function(result){
                                         return result.data;

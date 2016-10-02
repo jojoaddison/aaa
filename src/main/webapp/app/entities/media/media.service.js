@@ -2,7 +2,8 @@
     'use strict';
     angular
         .module('agreenApp')
-        .factory('Media', Media);
+        .factory('Media', Media)
+        .factory('MediaService', MediaService);
 
     Media.$inject = ['$resource', 'DateUtils'];
 
@@ -25,4 +26,20 @@
             'update': { method:'PUT' }
         });
     }
+
+    MediaService.$inject = ['$http'];
+
+    function MediaService($http){
+        return {
+            uploadToGridFS: function(files){
+                var url = "/api/gridfs";
+                $http.post(url, files);
+            },
+            uploadToMediaFS: function(files){
+                var url = "/api/media/files";
+                $http.post(url, files);
+            }
+        }
+    }
+
 })();

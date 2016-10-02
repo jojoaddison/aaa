@@ -16,6 +16,8 @@
             "detail": {
                 "title": "Page"
             },
+            "pid": "PID",
+            "lang": "Lange",
             "title": "Title",
             "name": "Name",
             "content": "Content",

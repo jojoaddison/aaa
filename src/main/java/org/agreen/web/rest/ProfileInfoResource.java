@@ -6,11 +6,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.agreen.config.JHipsterProperties;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import org.agreen.config.JHipsterProperties;
 
 @RestController
 @RequestMapping("/api")

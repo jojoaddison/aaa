@@ -17,8 +17,18 @@
                 pageTitle: 'agreenApp.project.home.title'
             },
             views: {
+                'header@': {
+                    templateUrl: 'app/entities/project/projects-header.html',
+                    controller: 'ProjectController',
+                    controllerAs: 'vm'
+                },
                 'content@': {
                     templateUrl: 'app/entities/project/projects.html',
+                    controller: 'ProjectController',
+                    controllerAs: 'vm'
+                },
+                'footer@': {
+                    templateUrl: 'app/entities/project/projects-footer.html',
                     controller: 'ProjectController',
                     controllerAs: 'vm'
                 }

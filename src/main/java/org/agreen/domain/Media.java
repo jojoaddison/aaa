@@ -38,14 +38,15 @@ public class Media implements Serializable {
     @Field("size")
     private Long size;
 
-    @Field("created_date")
-    private ZonedDateTime createdDate;
     
     @Field("content")
     private String content;
     
     @Field("bytes")
     private byte[] bytes;
+
+    @Field("created_date")
+    private ZonedDateTime createdDate;
     
     @Field("modified_date")
     private ZonedDateTime modifiedDate;
@@ -72,6 +73,10 @@ public class Media implements Serializable {
     
     public void setBytes(byte[] bytes){
     	this.bytes = bytes;
+    }
+    
+    public String getContent(){
+    	return content;
     }
     
     public void setContent(String content){

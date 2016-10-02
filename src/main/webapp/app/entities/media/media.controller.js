@@ -5,12 +5,13 @@
         .module('agreenApp')
         .controller('MediaController', MediaController);
 
-    MediaController.$inject = ['$scope', '$state', '$log', 'Media'];
+    MediaController.$inject = ['$scope', '$timeout', '$state', '$uibModal', 'Upload', 'Media', 'MediaService'];
 
-    function MediaController ($scope, $state, $log, Media) {
+    function MediaController ($scope, $timeout, $state, $uibModal, Upload, Media, MediaService) {
         var vm = this;
 
         vm.media = [];
+
 
         loadAll();
 
@@ -20,23 +21,40 @@
             });
         }
 
-        vm.dzAddedFile = function( file ) {
-            $log.log( file );
-        };
 
-        vm.dzError = function( file, errorMessage ) {
-            $log.log(errorMessage);
-        };
 
-        vm.dropzoneConfig = {
-            parallelUploads: 3,
-            maxFileSize: 30
-        };
+        vm.previewImage = function(image){
+            $uibModal.open(
+                {
+                    template: '<div id="mediaModal" class="well well-md">' +
+                              '<span class="media-close" ng-click="mVm.closeModal()">x</span>'+
+                              '<img class="media-modal-content" src="data:{{mVm.media.type}};base64, {{mVm.media.content}}" id="{{mVm.media.id}}">' +
+                              '<div class="media-caption">{{mVm.media.description}}</div>' +
+                              '</div>',
+                    controller: ['$uibModalInstance','media', function($uibModalInstance, media){
+                        //debugger;
+                        var mVm = this;
 
-        vm.save = save;
+                        mVm.media = media;
+                        mVm.closeModal = function () {
+                            $uibModalInstance.dismiss('cancel');
+                        };
 
-        function save(){
-            $log("save files");
+                    }],
+                    controllerAs: 'mVm',
+                    backdrop: 'static',
+                    size: 'md',
+                    resolve: {
+                        media: [function() {
+                            return image;
+                        }]
+                    }
+                }
+            ).result.then(function() {
+                    $state.go('media', null, { reload: true });
+                }, function() {
+                    $state.go('media');
+                });
         }
     }
 })();

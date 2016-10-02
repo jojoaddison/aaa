@@ -63,33 +63,71 @@ public class MediaResource {
 
 	      log.debug("REST request to save MediaFile : {}", mediaFile);	
     	
-	      Media media = new Media();
-	    	try{
-	    		  String filename = mediaFile.getOriginalFilename();
-	    	      String directory = env.getProperty("media.base");
-	    	      String filepath = Paths.get(directory, filename).toString();
+	      Media media = createMedia(mediaFile);
+	      if(media == null){
+	    	  return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	      }
+	    	Media result = mediaRepository.save(media);
+	        return ResponseEntity.created(new URI("/api/media/" + result.getId()))
+	            .headers(HeaderUtil.createEntityCreationAlert("media", result.getId()))
+	            .body(result);
+    }
 
-	    	      media.setName(filename);
-	    	      media.setSize(mediaFile.getSize());
-	    	      media.setType(media.getType());
-	    	      
-	    	      log.debug("REST request to save Media : {}", media);
-	    	      
-	    	      // Save the file locally
-	    	      BufferedOutputStream stream =
-	    	          new BufferedOutputStream(new FileOutputStream(new File(filepath)));
-	    	      
-	    	      stream.write(mediaFile.getBytes());
-	    	      stream.close();
-	    	      
-	    	}catch(Exception e){
-	    		log.debug(e.getMessage(), e.getCause());
-	    	}
+    /**
+     * POST  /mediaFile : Create a new mediaFile.
+     *
+     * @param media the media to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new media, or with status 400 (Bad Request) if the media has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @RequestMapping(value = "/media/files",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Media> 
+    	createMediaFiles(@RequestParam("mediaFiles") MultipartFile[] mediaFiles) 
+    		throws URISyntaxException{
+    		
+    	for(MultipartFile mediaFile: mediaFiles){
+    			log.debug("REST request to save MediaFile : {}", mediaFile);
+	      Media media = createMedia(mediaFile);
 	    	
 	    	Media result = mediaRepository.save(media);
 	        return ResponseEntity.created(new URI("/api/media/" + result.getId()))
 	            .headers(HeaderUtil.createEntityCreationAlert("media", result.getId().toString()))
-	            .body(result);
+	            .body(result);	    	
+    	}
+    	return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+    private Media createMedia(MultipartFile mediaFile){
+    	Media media = new Media();
+    	try{
+    		  String filename = mediaFile.getOriginalFilename();
+    	      String directory = env.getProperty("media.base");
+    	      String filepath = Paths.get(directory, filename).toString();
+    	      
+    	      log.debug("REST request to save Media at filepath: {}", filepath);
+
+    	      media.setName(filename);
+    	      media.setSize(mediaFile.getSize());
+    	      media.setType(mediaFile.getContentType());
+    	      media.setUrl(filepath);
+    	      
+    	      log.debug("REST request to save Media : {}", media);
+    	      
+    	      // Save the file locally
+    	      BufferedOutputStream stream =
+    	          new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+    	      
+    	      stream.write(mediaFile.getBytes());
+    	      stream.close();
+    	      
+    	}catch(Exception e){
+    		log.debug(e.getMessage(), e.getCause());
+    		return null;
+    	}
+    	return media;
     }
     
     /**
@@ -152,6 +190,27 @@ public class MediaResource {
         List<Media> media = mediaRepository.findAll();
         return media;
     }
+
+    /**
+     * GET  /media/find-by-name/:name : get the "name" media.
+     *
+     * @param name the name of the media to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the media, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/media/find-by-name/{name}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Media> getMediaByName(@PathVariable String name) {
+        log.debug("REST request to get Media : {}", name);
+        Media media = mediaRepository.findByName(name);
+        return Optional.ofNullable(media)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    
 
     /**
      * GET  /media/:id : get the "id" media.

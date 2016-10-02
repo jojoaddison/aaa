@@ -1,13 +1,34 @@
-
-<form name="editForm" role="form" novalidate ng-submit="vm.save()">
-
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
+        <!--
         <h4 class="modal-title" id="myMediaLabel" translate="agreenApp.media.home.createOrEditLabel">Create or edit a Media</h4>
+        -->
+        <h4 class="modal-title" id="myMediaLabel">Create Media</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
+        <p>&nbsp;</p>
+
+        <div class="container-fluid">
+
+            <div class="well well-md">
+                <form id="mediaForm" class="dropzone"
+                      method="post"
+                      enctype="multipart/form-data"
+                      ng-dropzone
+                      dropzone="vm.dropzone"
+                      dropzone-config="vm.dropzoneConfig"
+                      event-handlers="{ 'addedfile': vm.dzAddedFile, 'error': vm.dzError }">
+                </form>
+
+
+            </div>
+            <br>
+
+        </div>
+
+        <!--
         <div class="form-group" ng-show="vm.media.id">
             <label for="id" translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
@@ -69,14 +90,24 @@
                     </span>
                 </div>
         </div>
-
+        -->
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
-        </button>
+
+        <div class="row">
+            <div class="col-md-7 pull-right">
+                <button class="btn btn-success" ng-disabled="mediaForm.$invalid || vm.isSaving" ng-click="vm.save()">
+                    <span class="glyphicon glyphicon-upload"></span>&nbsp;<span>Upload</span>
+                </button>
+                <button class="btn btn-danger" ng-click="vm.reset()">
+                    <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span>Clear</span>
+                </button>
+                <button type="button" class="btn btn-material-grey" data-dismiss="modal" ng-click="vm.clear()">
+                    <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                </button>
+            </div>
+        </div>
     </div>
-</form>
+    <script type="text/javascript">
+        Dropzone.autoDiscover = false;
+    </script>

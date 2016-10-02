@@ -1,6 +1,13 @@
 package org.agreen.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.agreen.domain.PersistentToken;
 import org.agreen.domain.User;
@@ -13,7 +20,6 @@ import org.agreen.web.rest.dto.KeyAndPasswordDTO;
 import org.agreen.web.rest.dto.ManagedUserDTO;
 import org.agreen.web.rest.dto.UserDTO;
 import org.agreen.web.rest.util.HeaderUtil;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +27,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.*;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * REST controller for managing the current user's account.

@@ -1,0 +1,17 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "pid",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pages",
+            "fieldType": "String"
+        }
+    ],
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "article",
+    "pagination": "no"
+}

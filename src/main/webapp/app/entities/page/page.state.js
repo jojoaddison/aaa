@@ -17,11 +17,6 @@
                 pageTitle: 'agreenApp.page.home.title'
             },
             views: {
-                'header@': {
-                    templateUrl: 'app/admin/dashboard/db.header.html',
-                    controller: 'DashboardController',
-                    controllerAs: 'vm'
-                },
                 'content@': {
                     templateUrl: 'app/entities/page/pages.html',
                     controller: 'PageController',

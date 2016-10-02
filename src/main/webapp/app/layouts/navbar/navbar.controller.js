@@ -11,7 +11,7 @@
         var vm = this;
 
         vm.adminDashboardVisible=false;
-        vm.setAdminDashboardVisibility = setAdminDashboardVisibility;
+        vm.toggleAdminDashboardVisibility = toggleAdminDashboardVisibility;
 
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;
@@ -27,8 +27,8 @@
         vm.collapseNavbar = collapseNavbar;
         vm.$state = $state;
 
-        function setAdminDashboardVisibility(state){
-            vm.adminDashboardVisible = state;
+        function toggleAdminDashboardVisibility(){
+            vm.adminDashboardVisible = !vm.adminDashboardVisible;
         }
 
         function login() {

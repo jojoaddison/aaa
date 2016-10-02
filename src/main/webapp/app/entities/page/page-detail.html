@@ -1,9 +1,21 @@
 
 <div>
-    <h2><span translate="agreenApp.page.detail.title">Page</span> {{vm.page.id}}</h2>
+    <h2>{{vm.page.name}} <span translate="agreenApp.page.detail.title">Page</span> </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="agreenApp.page.lang">Language</span></dt>
+        <dd>
+            <span>{{vm.page.lang}}</span>
+        </dd>
+        <dt><span translate="agreenApp.page.pid">PID</span></dt>
+        <dd>
+            <span>{{vm.page.pid}}</span>
+        </dd>
+        <dt><span translate="agreenApp.page.name">Name</span></dt>
+        <dd>
+            <span>{{vm.page.name}}</span>
+        </dd>
         <dt><span translate="agreenApp.page.title">Title</span></dt>
         <dd>
             <span>{{vm.page.title}}</span>
@@ -12,9 +24,10 @@
         <dd>
             <span>{{vm.page.content}}</span>
         </dd>
+
         <dt><span translate="agreenApp.page.link">Link</span></dt>
-        <dd>
-            <span>{{vm.page.link}}</span>
+        <dd ng-repeat="link in vm.page.links track by link.id">
+            <span>{{link}}</span>
         </dd>
     </dl>
 
@@ -24,3 +37,6 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>
 </div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

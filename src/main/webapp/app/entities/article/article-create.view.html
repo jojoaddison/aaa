@@ -1,0 +1,129 @@
+    <div ng-if="vmEditor.article != null">
+        <form name="createForm" role="form" novalidate ng-submit="vmEditor.save()">
+        <div class="panel panel-default panel-material-brown">
+            <div class="panel-heading container-fluid">
+                <div class="panel-title"> <h2 style="color: wheat;">{{ vmEditor.article.title }}</h2> </div>
+                <ul class="nav nav-tabs navbar-nav navbar-right btn-material-brown">
+                    <li ng-class="{active: vmEditor.lang == 'en'}" class="btn btn-material-brown btn-md" ng-click="vmEditor.openLang('en')">English</li>
+                    <li ng-class="{active: vmEditor.lang == 'de'}" class="btn btn-material-brown btn-md" ng-click="vmEditor.openLang('de')">German</li>
+                    <li ng-class="{active: vmEditor.lang == 'fr'}" class="btn btn-material-brown btn-md" ng-click="vmEditor.openLang('fr')">French</li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <jhi-alert></jhi-alert>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <h4>
+                                        <label class="control-label" for="field_type">Type</label>
+                                    </h4>
+                                    <input type="text" class="form-control" name="type" id="field_type" ng-model="vmEditor.article.type" />
+                                    <select class="form-control btn btn-primary btn-sm" name="type" ng-model="vmEditor.article.type"
+                                            ng-options="type as type for type in vmEditor.types track by type">
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <h4>
+                                        <label class="control-label" for="field_pid">PID</label>
+                                    </h4>
+                                    <input type="text" class="form-control" name="pid" id="field_pid" ng-model="vmEditor.article.pid" />
+                                </div>
+                                <div class="col-md-3">
+                                    <h4>
+                                        <label class="control-label" translate="agreenApp.page.name" for="field_name">Name</label>
+                                    </h4>
+                                    <input type="text" class="form-control" name="name" id="field_name"
+                                           ng-model="vmEditor.page.name"
+                                        />
+                                </div>
+                                <div class="col-md-5">
+                                    <h4>
+                                        <label class="control-label" translate="agreenApp.page.title" for="field_title">Title</label>
+                                    </h4>
+                                    <input type="text" class="form-control" name="title" id="field_title"
+                                           ng-model="vmEditor.page.title"
+                                        />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h4>
+                                <label class="control-label" translate="agreenApp.page.content" for="pageEditor">Content</label>
+                            </h4>
+                            <!--
+                            <input type="text" class="form-control" name="content" id="pageEditor" ng-model="vmEditor.article.content"/>
+                             -->
+                            <textarea ui-tinymce="vmEditor.tinymceOptions" id="pageEditor" ng-model="vmEditor.page.content"  ng-cloak></textarea>
+                        </div>
+                        <div class="form-group">
+                            <h4>
+                                New Link
+                            </h4>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h6>Name</h6>
+                                    <input type="text" class="form-control" name="link" id="field_link_name"
+                                           ng-model="vmEditor.page.link.name"
+                                        />
+                                </div>
+                                <div class="col-md-4">
+                                    <h6>HREF</h6>
+                                    <input type="text" class="form-control" name="link" id="field_link_href"
+                                           ng-model="vmEditor.page.link.href"
+                                        />
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary btn-sm" ng-click="vmEditor.addPageLink()">
+                                        <span class="glyphicon glyphicon-plus-sign"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <h4>Links</h4>
+                            <div class="row" ng-repeat="link in vmEditor.page.links track by $index">
+                                <div class="col-md-4">
+                                    {{ link.name }}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ link.href }}
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-danger btn-sm" ng-click="vmEditor.delPageLink($index)">
+                                        <span class="glyphicon glyphicon-remove-sign"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--
+                <div class="pad">
+                    <hr>
+                    {{ vmEditor.page | json }}
+                </div>
+                -->
+            </div>
+            <div class="panel-footer btn-material-brown">
+                <div class="row text-right">
+
+                    <button type="submit" ng-disabled="editForm.$invalid || vmEditor.isSaving" class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+                    </button>
+
+                    <button type="button" class="btn btn-material-grey btn-sm " data-dismiss="modal" ng-click="vmEditor.clear()">
+                        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+    <!--
+    {{ vmEditor.article | json }}
+    -->

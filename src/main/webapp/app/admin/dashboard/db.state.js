@@ -13,26 +13,15 @@
                 parent: 'admin',
                 url: '/dashboard',
                 data: {
-                    authorities: ['ROLE_ADMIN'],
+                    authorities: ['ROLE_ADMIN','ROLE_USER'],
                     pageTitle: 'dashboard.home.title'
                 },
                 views: {
-                    'header@': {
-                        templateUrl: 'app/admin/dashboard/db.header.html',
-                        controller: 'DashboardController',
-                        controllerAs: 'vm'
-                    },
                     'content@': {
                         templateUrl: 'app/admin/dashboard/db.home.html',
                         controller: 'DashboardDetailController',
                         controllerAs: 'vm'
                     }
-                    /*,
-                    'footer@': {
-                        templateUrl: 'app/home/footer.html',
-                        controller: 'FooterController',
-                        controllerAs: 'vm'
-                    }*/
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
@@ -41,6 +30,32 @@
                         return $translate.refresh();
                     }]
                 }
+            })
+            .state('dashboard-page', {
+                parent: 'admin',
+                url: '/dashboard/page/{pid}/edit',
+                data: {
+                    authorities: ['ROLE_ADMIN','ROLE_USER'],
+                    pageTitle: 'dashboard.home.title'
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/admin/dashboard/db.editor.html',
+                        controller: 'DashboardEditorController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['Article', function(ArticleService) {
+                                return ArticleService.getByPid({pid : $stateParams.pid});
+                            }]
+                        }
+                    }).result.then(function() {
+                            $state.go('dashboard', null, { reload: true });
+                        }, function() {
+                            $state.go('^');
+                        });
+                }]
             })
             /**
             .state('dashboard-detail', {

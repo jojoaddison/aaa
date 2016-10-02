@@ -17,6 +17,7 @@
                 "project": "Project",
                 "blog": "Blog",
                 "media": "Media",
+                "article": "Article",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

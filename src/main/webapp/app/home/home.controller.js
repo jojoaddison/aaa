@@ -7,30 +7,93 @@
         .controller('HomeController', HomeController)
         .controller('FooterController', FooterController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', 'AlertService', '$sce', 'Article', 'tmhDynamicLocale'];
 
-    function HomeController ($scope, Principal, LoginService, $state) {
+    function HomeController ($scope, Principal, LoginService, $state, AlertService, $sce, Article, tmhDynamicLocale) {
         var vm = this;
-
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
         vm.register = register;
-        $scope.$on('authenticationSuccess', function() {
-            getAccount();
-        });
+        vm.information = null;
+        vm.lang = "en";
+        vm.headers = {};
+        vm.pages = {};
+        vm.partners = {};
 
-        getAccount();
+
+        function startListeners(){
+
+            $scope.$on('authenticationSuccess', function() {
+                getAccount();
+            });
+
+            $scope.$on('language-changed', function() {
+                getAccount();
+            });
+        }
 
         function getAccount() {
             Principal.identity().then(function(account) {
-                vm.account = account;
-                vm.isAuthenticated = Principal.isAuthenticated;
+                if(account){
+                    vm.account = account;
+                    vm.isAuthenticated = Principal.isAuthenticated;
+                    vm.lang = account.langKey;
+                }
+                loadPages();
             });
         }
+
+        function loadPages(){
+            Article.query({}, onSuccess, onError);
+        }
+
+        function onSuccess(articles) {
+            console.log("######### ARTICLES ######");
+            console.log(articles);
+            var lang = tmhDynamicLocale.get('NG_TRANSLATE_LANG_KEY');
+
+            angular.forEach(articles, function(article){
+
+               console.log("######### PAGE ######");
+               console.log(article);
+                angular.forEach(article.pages, function(page, index){
+                    if(page !== null && page.content !== null && page.lang == lang){
+                        page.content = $sce.trustAsHtml(page.content);
+                        page.id = index;
+
+                        if(article.type == 'header'){
+                            vm.headers[article.pid] = page;
+                        }
+
+                        if(article.type == 'page'){
+                            vm.pages[article.pid] = page;
+                        }
+
+                        if(article.type == 'partner'){
+                            vm.partners[article.pid] = page;
+                        }
+
+                    }
+                });
+            });
+            console.log("######### FINAL-PAGES ######");
+          console.log(vm.pages);
+        }
+
+        function onError(error) {
+            AlertService.error(error.data.message);
+        }
+
         function register () {
             $state.go('register');
         }
+
+        getAccount();
+
+        startListeners();
+
+
     }
 
     FooterController.$inject = ['$scope', '$rootScope', '$sce', 'tmhDynamicLocale', 'Global'];

@@ -48,6 +48,8 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/bootstrap-material-design/dist/js/ripples.js',
             'src/main/webapp/bower_components/dropzone/dist/min/dropzone.min.js',
             'src/main/webapp/bower_components/angular-dropzone/lib/angular-dropzone.js',
+            'src/main/webapp/bower_components/angular-file-upload/dist/angular-file-upload.min.js',
+            'src/main/webapp/bower_components/ng-img-crop/compile/minified/ng-img-crop.js',
             'src/main/webapp/bower_components/angular-mocks/angular-mocks.js',
             'src/main/webapp/bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js',
             'src/main/webapp/bower_components/angular-bootstrap-material/angular-bootstrap-material.min.js',

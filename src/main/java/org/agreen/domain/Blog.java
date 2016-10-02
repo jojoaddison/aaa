@@ -1,12 +1,14 @@
 package org.agreen.domain;
 
+import java.io.Serializable;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.io.Serializable;
-import java.time.ZonedDateTime;
-import java.util.Objects;
 
 /**
  * A Blog.
@@ -28,6 +30,9 @@ public class Blog implements Serializable {
 
     @Field("content")
     private String content;
+    
+    @Field("comments")
+    private Set<Comment> comments = new HashSet<>();
 
     @Field("created_date")
     private ZonedDateTime createdDate;
@@ -83,7 +88,15 @@ public class Blog implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-    @Override
+    public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

@@ -128,7 +128,6 @@
             return deferred.promise;
         }
 
-
         function logout () {
             AuthServerProvider.logout();
             $rootScope.$broadcast("logoutSuccess");

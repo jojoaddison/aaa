@@ -18,6 +18,7 @@
             'infinite-scroll',
             'ngSanitize',
             'ngDropzone',
+            'ngImgCrop',
             // jhipster-needle-angularjs-add-module JHipster will add new module here
             'angular-loading-bar'
         ])

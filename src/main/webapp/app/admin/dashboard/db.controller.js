@@ -8,13 +8,19 @@
         .controller('DashboardDetailController', DashboardDetailController)
         .controller('DashboardDialogController',DashboardDialogController);
 
+    DashboardEditorController.$inject = ['stateParams','entity', '$uibModalInstance', 'Article', 'ArticleService'];
+
+    function DashboardEditorController(stateParams, entity, $uibModalInstance, Article, Articleservice){
+
+    }
+
 
     /**
      * Dashboard General Controller
      **/
-    DashboardController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
+    DashboardController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', 'AlertService'];
 
-    function DashboardController($state, Auth, Principal, ProfileService, LoginService) {
+    function DashboardController($state, Auth, Principal, ProfileService, LoginService, AlertService) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -99,9 +105,9 @@
     /**
      * Dashboard Detail Controller
      **/
-    DashboardDetailController.$inject = ['Page', 'Album', 'PageService'];
+    DashboardDetailController.$inject = ['$scope', 'Page', 'Album', 'PageService', 'AlertService'];
 
-    function DashboardDetailController (Page, Album, PageService) {
+    function DashboardDetailController ($scope, Page, Album, PageService, AlertService) {
         var vm = this;
         vm.pagesExist = true;
         vm.pages = [];
@@ -128,6 +134,7 @@
         vm.clearAlbum = clearAlbum;
 
         vm.lang = 'en';
+        vm.pid = null;
 
         vm.tinymceOptions = {
             plugins: 'code',
@@ -188,9 +195,13 @@
         function savePage(){
             angular.forEach(vm.page, function(page){
                 if(page.id){
-                    Page.update(page);
+                    Page.update(page, function(){
+                        AlertService.success(page.pid + " " + page.lang + " updated");
+                    });
                 }else{
-                    Page.save(page);
+                    Page.save(page, function(){
+                        AlertService.success(page.pid + " " + page.lang + " save");
+                    });
                 }
             });
             loadPages();
@@ -224,12 +235,20 @@
 
             if(article == null){
                 PageService.getWithLang(vm.article.pid, lang).then(function(result){
+                    console.log("GetWithLang");
+                    console.log(result);
                     article = result;
-                    vm.page.push(result);
+                    vm.page = result;
                 });
             }
 
+            console.log("vm.page>>");
+            console.log("\t");
+            console.log(vm.page);
+
+
             if(article){
+                /*
                 if(vm.article != null && vm.article.pid != null){
                     article.pid = vm.article.pid;
 
@@ -241,11 +260,23 @@
                         }
                     }
                 }
-                if(article.pid == null){
+                 */
+                if(article.pid == null && pid != null){
                     article.pid = pid;
                 }
+
+                if(article.pid == null){
+                    if( vm.article != null && vm.article.pid != null){
+                        article.pid = pid;
+                    }
+                }
+
+
                 vm.article = article;
             }
+            console.log("vm.article>>");
+            console.log("\t");
+            console.log(vm.article);
 
         }
 
@@ -256,6 +287,7 @@
 
         function openPage(page){
             vm.page = page;
+            vm.pid = page.pid;
             openLang(vm.lang);
             clearAlbum();
         }
@@ -269,7 +301,7 @@
         }
 
         function loadPages(){
-            Page.query(function(result){
+            Page.query({},function(result){
                 if(result && result.length > 0){
                     vm.pages = result;
                 }
@@ -281,6 +313,7 @@
                     }
                     vm.articles[page.pid].push(page);
                 });
+                $scope.$broadcast('pages-loaded');
             });
 
         }
@@ -291,6 +324,22 @@
                 vm.albumsExist = vm.gallery.length > 0;
             });
         }
+
+        function getPageByPid(pid){
+            var page = null;
+            angular.forEach(vm.pages, function(p){
+                if(p.pid == pid){
+                    page = p;
+                }
+            });
+            return page;
+        }
+
+        $scope.$on('pages-loaded', function(){
+            if(vm.pid != null){
+                openPage(getPageByPid(vm.pid));
+            }
+        });
 
     }
 
