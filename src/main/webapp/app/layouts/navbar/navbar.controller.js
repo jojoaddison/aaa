@@ -10,6 +10,9 @@
     function NavbarController ($state, Auth, Principal, ProfileService, LoginService) {
         var vm = this;
 
+        vm.adminDashboardVisible=false;
+        vm.setAdminDashboardVisibility = setAdminDashboardVisibility;
+
         vm.isNavbarCollapsed = true;
         vm.isAuthenticated = Principal.isAuthenticated;
 
@@ -23,6 +26,10 @@
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
         vm.$state = $state;
+
+        function setAdminDashboardVisibility(state){
+            vm.adminDashboardVisible = state;
+        }
 
         function login() {
             collapseNavbar();
