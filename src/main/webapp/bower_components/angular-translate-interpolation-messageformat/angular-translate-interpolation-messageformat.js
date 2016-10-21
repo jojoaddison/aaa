@@ -1,5 +1,5 @@
 /*!
- * angular-translate - v2.11.0 - 2016-03-20
+ * angular-translate - v2.12.1 - 2016-09-15
  * 
  * Copyright (c) 2016 The angular-translate team, Pascal Precht; Licensed MIT
  */
@@ -118,7 +118,7 @@ function $translateMessageFormatInterpolation($translateSanitization, $cacheFact
    *
    * @returns {string} interpolated string.
    */
-  $translateInterpolator.interpolate = function (string, interpolationParams) {
+  $translateInterpolator.interpolate = function (string, interpolationParams/*, context*/) {
     interpolationParams = interpolationParams || {};
     interpolationParams = $translateSanitization.sanitize(interpolationParams, 'params');
 

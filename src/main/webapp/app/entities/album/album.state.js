@@ -10,18 +10,13 @@
     function stateConfig($stateProvider) {
         $stateProvider
         .state('album', {
-            parent: 'dashboard',
+            parent: 'entity',
             url: '/album?page&sort&search',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'agreenApp.album.home.title'
             },
             views: {
-                'header@': {
-                    templateUrl: 'app/admin/dashboard/db.header.html',
-                    controller: 'DashboardController',
-                    controllerAs: 'vm'
-                },
                 'content@': {
                     templateUrl: 'app/entities/album/albums.html',
                     controller: 'AlbumController',
@@ -57,7 +52,7 @@
             }
         })
         .state('album-detail', {
-            parent: 'dashboard',
+            parent: 'entity',
             url: '/album/{id}',
             data: {
                 authorities: ['ROLE_USER'],
@@ -81,7 +76,7 @@
             }
         })
         .state('album.new', {
-            parent: 'dashboard',
+            parent: 'entity',
             url: '/album/new',
             data: {
                 authorities: ['ROLE_USER']
@@ -119,7 +114,7 @@
             }]
         })
         .state('album.edit', {
-            parent: 'dashboard',
+            parent: 'entity',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
@@ -148,7 +143,7 @@
             }]
         })
         .state('album.delete', {
-            parent: 'dashboard',
+            parent: 'entity',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']

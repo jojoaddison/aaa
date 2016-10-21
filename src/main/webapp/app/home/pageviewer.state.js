@@ -9,8 +9,8 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('pageviewer', {
-                parent: 'app',
-                url: 'page/{pid}',
+                parent: 'home',
+                url: '/page/{pid}',
                 data: {
                     authorities: [],
                     pageTitle: 'agreenApp.page.detail.title'
@@ -37,7 +37,7 @@
                             }]
                         }
                     }).result.then(function() {
-                            //$state.go('home', null, { reload: true });
+                            $state.go('^');
                         }, function() {
                             $state.go('home');
                         });

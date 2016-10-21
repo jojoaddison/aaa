@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 
 import org.agreen.domain.Media;
 import org.agreen.repository.MediaRepository;
+import org.agreen.service.util.Tools;
 import org.agreen.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ import org.springframework.data.mongodb.gridfs.GridFsCriteria;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.codahale.metrics.annotation.Timed;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
@@ -52,7 +56,7 @@ public class GridFileResource {
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public ResponseEntity<Media> createOrUpdate(@RequestParam("mediaFile") MultipartFile file) throws URISyntaxException {
+  public ResponseEntity<Media> createOrUpdate(@RequestParam("mediaFile") MultipartFile file, @RequestParam("gallery") String gallery) throws URISyntaxException {
     String name = file.getOriginalFilename();
     try {
       Optional<GridFSDBFile> existing = maybeLoadFile(name);
@@ -60,6 +64,8 @@ public class GridFileResource {
         gridFsTemplate.delete(getFilenameQuery(name));
       }
       DBObject metaData = new BasicDBObject();
+      metaData.put("gallery", gallery);
+      metaData.put("name", name.substring(0, name.lastIndexOf('.')));
       //More metaData entries here
       GridFSFile savedFile = gridFsTemplate.store(file.getInputStream(), name, file.getContentType(), metaData);
       Optional<GridFSDBFile> opCreated = maybeLoadFile(name);
@@ -67,17 +73,20 @@ public class GridFileResource {
           GridFSDBFile created = opCreated.get();
           ByteArrayOutputStream os = new ByteArrayOutputStream();
           created.writeTo(os);
-      Media media = new Media();
-      media.setId(savedFile.getId().toString());
-      media.setName(name);
-      media.setSize(file.getSize());
-      media.setUrl("api/media/find-by-name/"+name);
-      media.setType(file.getContentType());
-      media.setContent(java.util.Base64.getEncoder().encodeToString(os.toByteArray()));
-      media = mediaRepository.save(media);
-      return ResponseEntity.created(new URI("/api/media/" + media.getName()))
-              .headers(HeaderUtil.createEntityCreationAlert("media", media.getName()))
-              .body(media);
+	      Media media = new Media();
+	      media.setCreatedDate(ZonedDateTime.now());
+	      media.setModifiedDate(ZonedDateTime.now());
+	      media.setId(savedFile.getId().toString());
+	      media.setName(name);
+	      media.setSize(file.getSize());
+	      media.setUrl("api/media/find-by-name/"+name);
+	      media.setType(file.getContentType());
+	      media.setContent(java.util.Base64.getEncoder().encodeToString(os.toByteArray()));
+	      
+	      media = mediaRepository.save(media);	      
+	      return ResponseEntity.created(new URI("/api/media/" + media.getName()))
+	              .headers(HeaderUtil.createEntityCreationAlert("media", media.getName()))
+	              .body(media);
       }
     } catch (IOException e) {
       log.debug(e.getMessage());
@@ -85,6 +94,46 @@ public class GridFileResource {
     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
+  @RequestMapping(value = "/file",
+	        method = RequestMethod.POST,
+	        produces = MediaType.APPLICATION_JSON_VALUE)
+	    @Timed
+  public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) throws URISyntaxException {
+    String name = file.getOriginalFilename();
+    try {
+      Optional<GridFSDBFile> existing = maybeLoadFile(name);
+      if (existing.isPresent()) {
+        gridFsTemplate.delete(getFilenameQuery(name));
+      }
+      DBObject metaData = new BasicDBObject();
+      metaData.put("name", name.substring(0, name.lastIndexOf('.')));
+      //More metaData entries here
+      GridFSFile savedFile = gridFsTemplate.store(file.getInputStream(), name, file.getContentType(), metaData);
+      Optional<GridFSDBFile> opCreated = maybeLoadFile(name);
+      if (opCreated.isPresent()) {
+          GridFSDBFile created = opCreated.get();
+          ByteArrayOutputStream os = new ByteArrayOutputStream();
+          created.writeTo(os);
+	      Media media = new Media();
+	      media.setCreatedDate(ZonedDateTime.now());
+	      media.setModifiedDate(ZonedDateTime.now());
+	      media.setId(savedFile.getId().toString());
+	      media.setName(name);
+	      media.setSize(file.getSize());
+	      media.setUrl("api/media/find-by-name/"+name);
+	      media.setType(file.getContentType());
+	      media.setContent(java.util.Base64.getEncoder().encodeToString(os.toByteArray()));
+	      
+	      media = mediaRepository.save(media);	      
+	      return ResponseEntity.created(new URI("/api/gridfs/file/" + media.getName()))
+	              .headers(HeaderUtil.createEntityCreationAlert("media", media.getName()))
+	              .body(Tools.printJSON(media));
+      }
+    } catch (IOException e) {
+      log.debug(e.getMessage());
+    }
+    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+  }
   @RequestMapping(method = RequestMethod.GET)
   public @ResponseBody List<String> list() {
     return getFiles().stream()

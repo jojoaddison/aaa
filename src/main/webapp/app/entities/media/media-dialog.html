@@ -4,14 +4,13 @@
         <!--
         <h4 class="modal-title" id="myMediaLabel" translate="agreenApp.media.home.createOrEditLabel">Create or edit a Media</h4>
         -->
-        <h4 class="modal-title" id="myMediaLabel">Create Media</h4>
+        <h4 class="modal-title" id="myMediaLabel">Media Management</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <p>&nbsp;</p>
 
         <div class="container-fluid">
-
             <div class="well well-md">
                 <form id="mediaForm" class="dropzone"
                       method="post"
@@ -21,11 +20,14 @@
                       dropzone-config="vm.dropzoneConfig"
                       event-handlers="{ 'addedfile': vm.dzAddedFile, 'error': vm.dzError }">
                 </form>
-
-
             </div>
             <br>
-
+            <div class="form-group">
+                <label class="control-label" translate="agreenApp.media.description" for="field_description">Description</label>
+                <input type="text" class="form-control" name="description" id="field_description"
+                       ng-model="vm.media.description"
+                    />
+            </div>
         </div>
 
         <!--
@@ -57,14 +59,7 @@
             <input type="text" class="form-control" name="type" id="field_type"
                     ng-model="vm.media.type"
                      />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="agreenApp.media.description" for="field_description">Description</label>
-            <input type="text" class="form-control" name="description" id="field_description"
-                    ng-model="vm.media.description"
-                     />
-        </div>
-        <div class="form-group">
+        </div>bhz
             <label class="control-label" translate="agreenApp.media.size" for="field_size">Size</label>
             <input type="number" class="form-control" name="size" id="field_size"
                     ng-model="vm.media.size"

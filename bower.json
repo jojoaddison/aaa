@@ -5,8 +5,9 @@
   "testPath": "src/test/javascript/spec",
   "dependencies": {
     "jquery": "2.2.4",
-    "angular": "1.5.7",
+    "angular": "1.5.x",
     "angular-aria": "*",
+    "angular-animate": "1.5.x",
     "angular-bootstrap": "*",
     "angular-cache-buster": "*",
     "angular-cookies": "*",
@@ -56,6 +57,7 @@
   },
   "resolutions": {
     "jquery": "2.2.4",
-    "dropzone": "^4.3.0"
+    "dropzone": "^4.3.0",
+    "angular": "1.5.8"
   }
 }

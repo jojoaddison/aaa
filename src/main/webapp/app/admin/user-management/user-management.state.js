@@ -17,11 +17,6 @@
                     pageTitle: 'user-management.home.title'
                 },
                 views: {
-                    'header@': {
-                        templateUrl: 'app/admin/dashboard/db.header.html',
-                        controller: 'DashboardController',
-                        controllerAs: 'vm'
-                    },
                     'content@': {
                         templateUrl: 'app/admin/user-management/user-management.html',
                         controller: 'UserManagementController',

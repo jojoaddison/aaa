@@ -132,7 +132,7 @@
 
     HeaderController.$inject = ['$scope','Slider','Principal','$location'];
     function HeaderController ($scope, Slider, Principal, $location){
-        var slideBox = $("#slider");
+        var slideBox = angular.element("#slider");
         var vm = this;
         vm.isAuthenticated = Principal.isAuthenticated();
         vm.openAlbum = openAlbum;

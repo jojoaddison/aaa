@@ -104,7 +104,6 @@
                     </ul>
                 </div>
             </div>
-
             <div class="container-fluid admin-header hidden-xs" ng-switch-when="true" has-authority="ROLE_ADMIN">
                 <div class="row">
                     <ul class="nav navbar-nav navbar-right">
@@ -127,13 +126,6 @@
                             <ul class="dropdown-menu" uib-dropdown-menu>
 
                                 <li ui-sref-active="active">
-                                    <a ui-sref="page" ng-click="vm.collapseNavbar()">
-                                        <span class="glyphicon glyphicon-star"></span>&nbsp;
-                                        <span translate="global.menu.entities.pages">Pages</span>
-                                    </a>
-                                </li>
-
-                                <li ui-sref-active="active">
                                     <a ui-sref="article" ng-click="vm.collapseNavbar()">
                                         <span class="glyphicon glyphicon-star"></span>&nbsp;
                                         <span translate="global.menu.entities.article">Article</span>
@@ -141,12 +133,25 @@
                                 </li>
 
                                 <li ui-sref-active="active">
-                                    <a ui-sref="media" ng-click="vm.collapseNavbar()">
+                                    <a ui-sref="gallery" ng-click="vm.collapseNavbar()">
                                         <span class="glyphicon glyphicon-star"></span>&nbsp;
                                         <span translate="global.menu.entities.gallery">Gallery</span>
                                     </a>
                                 </li>
 
+                                <li ui-sref-active="active">
+                                    <a ui-sref="project" ng-click="vm.collapseNavbar()">
+                                        <span class="glyphicon glyphicon-star"></span>&nbsp;
+                                        <span translate="global.menu.entities.project">Projects</span>
+                                    </a>
+                                </li>
+
+                                <li ui-sref-active="active">
+                                    <a ui-sref="slide-show" ng-click="vm.collapseNavbar()">
+                                        <span class="glyphicon glyphicon-star"></span>&nbsp;
+                                        <span>Slides</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">

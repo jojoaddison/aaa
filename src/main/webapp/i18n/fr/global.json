@@ -18,6 +18,8 @@
                 "blog": "Blog",
                 "media": "Media",
                 "article": "Article",
+                "slide": "Slide",
+                "slideShow": "Slide Show",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -99,7 +101,8 @@
             "delete": "Supprimer",
             "open": "Ouvrir",
             "save": "Sauvegarder",
-            "view": "Voir"
+            "view": "Voir",
+            "preview": "Aperçu"
         },
         "detail": {
             "field": "Champs",

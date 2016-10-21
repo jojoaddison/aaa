@@ -21,8 +21,6 @@
             });
         }
 
-
-
         vm.previewImage = function(image){
             $uibModal.open(
                 {
@@ -55,6 +53,6 @@
                 }, function() {
                     $state.go('media');
                 });
-        }
+        };
     }
 })();

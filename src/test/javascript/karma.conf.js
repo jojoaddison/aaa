@@ -26,6 +26,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/jquery/dist/jquery.js',
             'src/main/webapp/bower_components/angular/angular.js',
             'src/main/webapp/bower_components/angular-aria/angular-aria.js',
+            'src/main/webapp/bower_components/angular-animate/angular-animate.js',
             'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             'src/main/webapp/bower_components/angular-cache-buster/angular-cache-buster.js',
             'src/main/webapp/bower_components/angular-cookies/angular-cookies.js',

@@ -618,6 +618,7 @@ blockquote + p {
     position: fixed;
     top: 0;
     z-index: 1000;
+    height: 125px !important;
 }
 .header-inner .row,
 .main-nav .row {

@@ -40,7 +40,7 @@
                         <ul>
                             <li ng-repeat="link in association.links track by $index">
 
-                                <a href="#/{{link.url}}">{{link.label}}</a>
+                                <a ui-sref="pageviewer({pid: link.url})">{{link.label}}</a>
                             </li>
                         </ul>
                     </li><!-- .widget.widget_pages end -->
@@ -82,9 +82,8 @@
             <!-- .col-md-6 start -->
             <div class="col-md-6">
                 <ul class="breadcrumb footer-breadcrumb">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/" target="_blank">Impressum</a></li>
-                    <li><a href="/">Contact</a></li>
+                    <li><a ui-sref="pageviewer({pid: 'impressum'})">Impressum</a></li>
+                    <li><a ui-sref="pageviewer({pid: 'contact'})">Contact</a></li>
                 </ul>
             </div><!-- .col-md-6 end -->
         </div><!-- .row end -->

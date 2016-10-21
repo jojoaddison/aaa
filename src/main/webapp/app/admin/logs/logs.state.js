@@ -16,11 +16,6 @@
                 pageTitle: 'logs.title'
             },
             views: {
-                'header@': {
-                    templateUrl: 'app/admin/dashboard/db.header.html',
-                    controller: 'DashboardController',
-                    controllerAs: 'vm'
-                },
                 'content@': {
                     templateUrl: 'app/admin/logs/logs.html',
                     controller: 'LogsController',

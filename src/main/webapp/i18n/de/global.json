@@ -18,6 +18,8 @@
                 "blog": "Blog",
                 "media": "Media",
                 "article": "Article",
+                "slide": "Slide",
+                "slideShow": "Slide Show",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -99,7 +101,8 @@
             "edit": "Bearbeiten",
             "open": "Open",
             "save": "Speichern",
-            "view": "Details"
+            "view": "Details",
+            "preview": "Vorschau"
         },
         "detail": {
             "field": "Feld",

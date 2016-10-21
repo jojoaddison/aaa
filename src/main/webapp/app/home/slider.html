@@ -1,5 +1,5 @@
 
-<div class="tp-banner-container fullwidthbanner mb-0 hidden-sm">
+<div class="tp-banner-container fullwidthbanner mb-30">
     <div id="rev-slider" class="tp-banner">
         <ul>
             <!-- SLIDE ONE -->
@@ -127,20 +127,15 @@
             <!-- SLIDE TEN END -->
         </ul>
     </div>
-    <div id="editSlider" class="row row-fluid hidden-xs">
-        <a id="editSliderBtn" class="editicon" ng-show="vm.isAuthenticated" href="#/album" style="vertical-align: middle !important; ">
-            <span class="glyphicon glyphicon-pencil"></span>
-        </a>
-    </div>
     <!-- .tp-banner end -->
 </div>
 <!-- .tp-banner-container end -->
-
+<script src="content/rs/js/jquery.themepunch.tools.min.js"></script><!-- Revolution slider script -->
+<script src="content/rs/js/jquery.themepunch.revolution.min.js"></script><!-- Revolution slider script -->
 <script>
     /* <![CDATA[ */
     $(document).ready(function ($) {
         'use strict';
-
 
         $('.tp-banner').revolution(
             {
@@ -177,7 +172,6 @@
                 autoHeight: "off",
                 forceFullWidth: "off"
             });
-
 
     });
     /* ]]> */

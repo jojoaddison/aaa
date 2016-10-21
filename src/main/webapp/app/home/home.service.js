@@ -18,6 +18,9 @@ angular.module('agreenApp')
             get: function(){
                 var path = "app/home/slider.html";
                 return $http.get(path);
+            },
+            getData: function(path){
+                return $http.get(path);
             }
         }
     }

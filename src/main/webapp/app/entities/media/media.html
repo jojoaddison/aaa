@@ -28,7 +28,7 @@
                 <tr ng-repeat="media in vm.media track by media.id">
                     <td class="media-img">
                         <a ng-click="vm.previewImage(media)">
-                            <img src="data:{{media.type}};base64, {{ media.content }}" style='display:block; width:100px;height:auto'/>
+                            <img src="data:{{media.type}};base64, {{ media.content }}" class="media-img"/>
                         </a>
                     </td>
                     <td>{{media.name}}</td>
@@ -60,6 +60,10 @@
         </table>
     </div>
 
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
     <br />
 
     <p>&nbsp;</p>
