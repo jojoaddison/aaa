@@ -1,4 +1,19 @@
     <div class="well well-md no-header mb-80">
+        <h2 translate="agreenApp.project.home.title">Projects</h2>
+        <jhi-alert></jhi-alert>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 no-padding-left">
+                    <button class="btn btn-primary" ui-sref="project.new" >
+                        <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="agreenApp.project.home.createLabel">
+                        Create new Slide
+                    </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br/>
         <div class="table-responsive">
             <div class="row" ng-repeat="project in vm.projects track by project.id">
                 <hr/>
@@ -12,7 +27,7 @@
                         <ul ng-repeat="photo in project.album" class="row-fluid polaroids">
                             <li>
                                <a title="photo.alt">
-                                   <img src="photo.src" alt="photo.alt"/>
+                                   <img ng-src="photo.src" alt="photo.alt"/>
                                </a>
                             </li>
                         </ul>

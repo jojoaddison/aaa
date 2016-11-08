@@ -17,15 +17,29 @@
         vmEditor.page = null;
         vmEditor.pageIndex = 0;
 
-        vmEditor.types = ["modal","slider","header","page","partner"];
+        vmEditor.types = ["project", "modal","slider","header","page","partner", "links"];
 
+        vmEditor.showLinksEditor = false;
+        vmEditor.showAlbumEditor = false;
 
         vmEditor.tinymceOptions = {
             plugins: 'code'
         };
 
+        vmEditor.toggleLinksEditor = toggleLinksEditor;
+
+        vmEditor.toggleAlbumEditor = toggleAlbumEditor;
+
 
         openLang("en");
+
+        function toggleAlbumEditor(){
+            vmEditor.showAlbumEditor = !vmEditor.showAlbumEditor;
+        }
+
+        function toggleLinksEditor(){
+            vmEditor.showLinksEditor = !vmEditor.showLinksEditor;
+        }
 
         function openLang(lang){
 
@@ -35,6 +49,9 @@
                 vmEditor.article.pages[vmEditor.page.id] = vmEditor.page;
             }
 
+            if(vmEditor.article.album){
+
+            }
 
             angular.forEach(vmEditor.article.pages, function(page, k){
                 if(page.lang == lang){
@@ -47,7 +64,6 @@
 
 
         }
-
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -65,7 +81,7 @@
                 angular.forEach(vmEditor.article.pages, function(page){
                     page.pid = vmEditor.article.pid;
                 });
-                console.log(vmEditor.article);
+                //console.log(vmEditor.article);
                 Article.save(vmEditor.article, onSaveSuccess, onSaveError);
             }
         }

@@ -16,11 +16,6 @@
                 pageTitle: 'configuration.title'
             },
             views: {
-                'header@': {
-                    templateUrl: 'app/admin/dashboard/db.header.html',
-                    controller: 'DashboardController',
-                    controllerAs: 'vm'
-                },
                 'content@': {
                     templateUrl: 'app/admin/configuration/configuration.html',
                     controller: 'JhiConfigurationController',

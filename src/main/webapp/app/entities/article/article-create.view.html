@@ -19,8 +19,10 @@
                                     <h4>
                                         <label class="control-label" for="field_type">Type</label>
                                     </h4>
-                                    <input type="text" class="form-control" name="type" id="field_type" ng-model="vmEditor.article.type" />
-                                    <select class="form-control btn btn-primary btn-sm" name="type" ng-model="vmEditor.article.type"
+                                    <!--
+                                    <input type="text" class="form-control text-uppercase" name="type" id="field_type" ng-model="vmEditor.article.type" readonly/>
+                                    -->
+                                    <select id="field_type" class="form-control btn btn-material-brown btn-sm" name="type" ng-model="vmEditor.article.type"
                                             ng-options="type as type for type in vmEditor.types track by type">
                                     </select>
                                 </div>
@@ -58,6 +60,28 @@
                              -->
                             <textarea ui-tinymce="vmEditor.tinymceOptions" id="pageEditor" ng-model="vmEditor.page.content"  ng-cloak></textarea>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button class="btn btn-material-brown btn-sm" ng-click="vmEditor.toggleLinksEditor()" ng-if="vmEditor.showLinksEditor==false">
+                                    <span class="glphicon glyphicon-plus"></span>&nbsp;links
+                                </button>
+                                <button class="btn btn-material-brown btn-sm" ng-click="vmEditor.toggleLinksEditor()" ng-if="vmEditor.showLinksEditor==true">
+                                    <span class="glphicon glyphicon-minus"></span>&nbsp;links
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-material-brown btn-sm" ng-click="vmEditor.toggleAlbumEditor()" ng-if="vmEditor.showAlbumEditor==false">
+                                    <span class="glphicon glyphicon-plus"></span>&nbsp;Album
+                                </button>
+                                <button class="btn btn-material-brown btn-sm" ng-click="vmEditor.toggleAlbumEditor()" ng-if="vmEditor.showAlbumEditor==true">
+                                    <span class="glphicon glyphicon-minus"></span>&nbsp;Album
+                                </button>
+                            </div>
+                        </div>
+
+                        <div ng-if="vmEditor.showLinksEditor==true">
+                        <hr />
                         <div class="form-group">
                             <h4>
                                 New Link
@@ -81,26 +105,32 @@
                                     </button>
                                 </div>
                             </div>
-                            <br/>
-                            <br/>
+                            <hr />
                             <h4>Links</h4>
                             <div class="row" ng-repeat="link in vmEditor.page.links track by $index">
                                 <div class="col-md-4">
-                                    {{ link.name }}
+                                        {{ link.name }}
                                 </div>
                                 <div class="col-md-4">
-                                    {{ link.href }}
+                                        {{ link.href }}
                                 </div>
                                 <div class="col-md-4">
                                     <button class="btn btn-danger btn-sm" ng-click="vmEditor.delPageLink($index)">
-                                        <span class="glyphicon glyphicon-remove-sign"></span>
+                                            <span class="glyphicon glyphicon-remove-sign"></span>
                                     </button>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
+                        <div ng-if="vmEditor.showAlbumEditor==true">
+                            <hr />
+
+                            <hr />
+                        </div>
+
                 </div>
+            </div>
                 <!--
                 <div class="pad">
                     <hr>
@@ -109,7 +139,7 @@
                 -->
             </div>
             <div class="panel-footer btn-material-brown">
-                <div class="row text-right">
+                <div class="row text-right" style="margin-right:20px;">
 
                     <button type="submit" ng-disabled="editForm.$invalid || vmEditor.isSaving" class="btn btn-primary btn-sm">
                         <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>

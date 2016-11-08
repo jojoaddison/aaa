@@ -16,11 +16,6 @@
                 pageTitle: 'global.menu.admin.apidocs'
             },
             views: {
-                'header@': {
-                    templateUrl: 'app/admin/dashboard/db.header.html',
-                    controller: 'DashboardController',
-                    controllerAs: 'vm'
-                },
                 'content@': {
                     templateUrl: 'app/admin/docs/docs.html'
                 }

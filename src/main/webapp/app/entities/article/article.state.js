@@ -108,6 +108,7 @@
                             entity: function () {
                                 return {
                                     id: null,
+                                    type: 'page',
                                     pid: 'new_page',
                                     pages: [
                                         {
@@ -155,7 +156,9 @@
                                                 }
                                             ]
                                         }
-                                    ]
+                                    ],
+                                    links: [],
+                                    album: null
                                 };
                             }
                         }

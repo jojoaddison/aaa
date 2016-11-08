@@ -130,8 +130,8 @@
             bindListener();
     }
 
-    HeaderController.$inject = ['$scope','Slider','Principal','$location'];
-    function HeaderController ($scope, Slider, Principal, $location){
+    HeaderController.$inject = ['$scope','Slider','Principal','$location','$timeout'];
+    function HeaderController ($scope, Slider, Principal, $location, $timeout){
         var slideBox = angular.element("#slider");
         var vm = this;
         vm.isAuthenticated = Principal.isAuthenticated();
@@ -143,7 +143,43 @@
             Slider.get().then(function(slides){
                 slideBox.html(slides.data);
                 slideBox.addClass('photo-banner');
-                showEditBtn(vm.isAuthenticated);
+                $timeout(function(){
+                    angular.element(".tp-banner").revolution(
+                        {
+                            delay: 6000,
+                            startwidth: 1170,
+                            startheight: 351,
+                            hideThumbs: 300,
+                            thumbWidth: 100,
+                            thumbHeight: 50,
+                            thumbAmount: 3,
+                            navigationStyle: "none",
+                            navigationType: "none",
+                            touchenabled: "on",
+                            onHoverStop: "on",
+                            swipe_velocity: 0.7,
+                            swipe_min_touches: 1,
+                            swipe_max_touches: 1,
+                            drag_block_vertical: false,
+                            keyboardNavigation: "on",
+                            navigationHAlign: "center",
+                            navigationVAlign: "bottom",
+                            navigationHOffset: 0,
+                            navigationVOffset: 20,
+                            soloArrowLeftHalign: "left",
+                            soloArrowLeftValign: "center",
+                            soloArrowLeftHOffset: 20,
+                            soloArrowLeftVOffset: 0,
+                            soloArrowRightHalign: "right",
+                            soloArrowRightValign: "center",
+                            soloArrowRightHOffset: 20,
+                            soloArrowRightVOffset: 0,
+                            shadow: 0,
+                            fullWidth: "off",
+                            autoHeight: "off",
+                            forceFullWidth: "off"
+                        });
+                });
             });
         }
         $scope.$on('authenticationSuccess', function() {

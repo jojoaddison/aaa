@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('agreenApp')
-        .factory('Photo', Photo);
+        .factory('Photo', Photo)
 
     Photo.$inject = ['$resource', 'DateUtils'];
 
@@ -25,4 +25,6 @@
             'update': { method:'PUT' }
         });
     }
+
+
 })();
