@@ -37,7 +37,7 @@
         vm.dropzoneConfig = {
             parallelUploads: 3,
             maxFileSize: 100,
-            url: '/api/gridfs',
+            url: '/api/media/files',
             acceptedFiles : 'image/jpeg, images/jpg, image/png',
             addRemoveLinks : true,
             dictDefaultMessage : 'Click to add or drop photos',
@@ -53,11 +53,10 @@
                     console.log(file);
                     if (!file.$error) {
                         Upload.upload({
-                            // url: 'api/media/file',
-                            url: 'api/gridfs',
+                            url: 'api/media/file',
                             data: {
                                 mediaFile: file,
-                                gallery: vm.gallery
+                                gallery: vm.gallery.description
                             }
                         }).then(function (resp) {
                             $timeout(function() {

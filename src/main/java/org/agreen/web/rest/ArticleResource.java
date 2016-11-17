@@ -136,6 +136,27 @@ public class ArticleResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    
+
+    /**
+     * GET  /articles/:id : get the "id" article.
+     *
+     * @param id the id of the article to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the article, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/articles/by-type/{type}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Article> getArticleByType(@PathVariable String type) {
+        log.debug("REST request to get Article by TYPE : {}", type);
+        Article article = articleRepository.findByType(type);
+        return Optional.ofNullable(article)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
     /**
      * DELETE  /articles/:id : delete the "id" article.

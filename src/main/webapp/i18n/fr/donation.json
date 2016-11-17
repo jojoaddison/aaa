@@ -1,0 +1,26 @@
+{
+    "agreenApp": {
+        "donation" : {
+            "home": {
+                "title": "Donations",
+                "createLabel": "Créer un nouveau Donation",
+                "createOrEditLabel": "Créer ou éditer un Donation",
+                "search": "Recherche pour Donation"
+            },
+            "created": "Un nouveau Donation a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Donation avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Donation avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Donation {{ id }} ?"
+            },
+            "detail": {
+                "title": "Donation"
+            },
+            "amount": "Amount",
+            "memberId": "Member Id",
+            "donatedDate": "Donated Date",
+            "projectId": "Project Id",
+            "type": "Type"
+        }
+    }
+}

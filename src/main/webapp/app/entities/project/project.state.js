@@ -13,8 +13,8 @@
             parent: 'entity',
             url: '/project',
             data: {
-                authorities: ['ROLE_USER'],
-                pageTitle: 'agreenApp.project.home.title'
+                pageTitle: 'agreenApp.project.home.title',
+                authorities: []
             },
             views: {
                 'content@': {
@@ -35,8 +35,8 @@
             parent: 'entity',
             url: '/project/{id}',
             data: {
-                authorities: ['ROLE_USER'],
-                pageTitle: 'agreenApp.project.detail.title'
+                pageTitle: 'agreenApp.project.detail.title',
+                authorities: []
             },
             views: {
                 'content@': {

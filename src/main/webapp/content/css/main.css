@@ -339,7 +339,7 @@ ui bootstrap tweaks
 
 .tp-banner-container{
     overflow: hidden;
-    top: 40px;
+    /*top: 40px;*/
 }
 
 
@@ -394,7 +394,7 @@ ui bootstrap tweaks
     width: 100%;
     height: 500px;
     position: relative;
-    top: 100px;
+    top: 130px;
     left: 0;
 }
 

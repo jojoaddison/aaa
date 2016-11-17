@@ -2,20 +2,25 @@ package org.agreen.web.rest;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.inject.Inject;
 
 import org.agreen.domain.Media;
 import org.agreen.repository.MediaRepository;
+import org.agreen.service.util.Tools;
 import org.agreen.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,6 +50,37 @@ public class MediaResource {
     @Inject
     private Environment env;
     
+    @Value("${client.root-directory}")
+    private String rootDirectory;
+
+    private Media createMedia(MultipartFile mediaFile, String albumURL) throws IOException{
+    	Media media = new Media();
+    	 String sep 		 = Tools.getSeparator();
+     	  
+	        String directory = env.getProperty("client.root-directory");  	      	  
+			  
+	      	String filename  =  Tools.removeSpaces(mediaFile.getOriginalFilename()).toLowerCase();  
+	      	
+	      	String albumPath = albumURL + sep + filename;
+			  
+	        String filepath  = Paths.get(directory, albumPath).toString();
+	      
+	        log.debug("REST request to save Media at filepath: {}", filepath);
+	
+	        media.setName(filename);
+	        media.setSize(mediaFile.getSize());
+	        media.setType(mediaFile.getContentType());
+	        media.setUrl(albumPath);
+	      
+	        log.debug("REST request to save Media : {}", media);
+	      
+	        // Save the file locally
+	        BufferedOutputStream stream =
+	          new BufferedOutputStream(new FileOutputStream(new File(filepath)));	      
+	        stream.write(mediaFile.getBytes());
+	        stream.close();
+    	return media;
+    }
 
     /**
      * POST  /mediaFile : Create a new mediaFile.
@@ -58,19 +94,33 @@ public class MediaResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Media> 
-    	createMediaFile(@RequestParam("mediaFile") MultipartFile mediaFile) 
+    	createMediaFile(@RequestParam("mediaFile") MultipartFile mediaFile, @RequestParam("gallery")String album) 
     		throws URISyntaxException{
 
-	      log.debug("REST request to save MediaFile : {}", mediaFile);	
-    	
-	      Media media = createMedia(mediaFile);
-	      if(media == null){
-	    	  return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	      }
-	    	Media result = mediaRepository.save(media);
+	      log.debug("REST request to save MediaFile : {}, {}", album, mediaFile);
+	      
+	        String sep = Tools.getSeparator();
+	        String year = Tools.getYear();
+	        String month = Tools.getMonth();
+	        String day = Tools.getDay();
+	        String hour = Tools.getHour();
+	        String name = Tools.removeSpaces(album);
+	        String url = year + sep + month + sep + day + sep + name;
+          
+	      Media media;
+		try {
+			media = createMedia(mediaFile, url);
+			Media result = mediaRepository.save(media);
 	        return ResponseEntity.created(new URI("/api/media/" + result.getId()))
 	            .headers(HeaderUtil.createEntityCreationAlert("media", result.getId()))
 	            .body(result);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	      
+	    	
     }
 
     /**
@@ -85,50 +135,35 @@ public class MediaResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Media> 
-    	createMediaFiles(@RequestParam("mediaFiles") MultipartFile[] mediaFiles) 
+    	createMediaFiles(@RequestParam("mediaFiles") MultipartFile[] mediaFiles, @RequestParam("gallery")String album) 
     		throws URISyntaxException{
-    		
-    	for(MultipartFile mediaFile: mediaFiles){
-    			log.debug("REST request to save MediaFile : {}", mediaFile);
-	      Media media = createMedia(mediaFile);
+
+	        String sep = Tools.getSeparator();
+	        String year = Tools.getYear();
+	        String month = Tools.getMonth();
+	        String day = Tools.getDay();
+	        String name = Tools.removeSpaces(album);
+	        String url = year + sep + month + sep + day + sep + name;
+	        Media result = new Media();
+	    	for(MultipartFile mediaFile: mediaFiles){
+	    			log.debug("REST request to save MediaFile : {}, {}", album, mediaFile);
+	    			Media media;
+					try {
+						media = createMedia(mediaFile, url);
+					} catch (IOException e) {
+						e.printStackTrace();
+						return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+					}	    	
+					media.setDescription(album);
+	    			result = mediaRepository.save(media);	         	
+	    	}	   
+
+	    	return ResponseEntity.created(new URI("/api/media/" + result.getId()))
+		            .headers(HeaderUtil.createEntityCreationAlert("media", result.getId().toString()))
+		            .body(result);
 	    	
-	    	Media result = mediaRepository.save(media);
-	        return ResponseEntity.created(new URI("/api/media/" + result.getId()))
-	            .headers(HeaderUtil.createEntityCreationAlert("media", result.getId().toString()))
-	            .body(result);	    	
-    	}
-    	return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
-    private Media createMedia(MultipartFile mediaFile){
-    	Media media = new Media();
-    	try{
-    		  String filename = mediaFile.getOriginalFilename();
-    	      String directory = env.getProperty("media.base");
-    	      String filepath = Paths.get(directory, filename).toString();
-    	      
-    	      log.debug("REST request to save Media at filepath: {}", filepath);
-
-    	      media.setName(filename);
-    	      media.setSize(mediaFile.getSize());
-    	      media.setType(mediaFile.getContentType());
-    	      media.setUrl(filepath);
-    	      
-    	      log.debug("REST request to save Media : {}", media);
-    	      
-    	      // Save the file locally
-    	      BufferedOutputStream stream =
-    	          new BufferedOutputStream(new FileOutputStream(new File(filepath)));
-    	      
-    	      stream.write(mediaFile.getBytes());
-    	      stream.close();
-    	      
-    	}catch(Exception e){
-    		log.debug(e.getMessage(), e.getCause());
-    		return null;
-    	}
-    	return media;
-    }
     
     /**
      * POST  /media : Create a new media.
@@ -210,6 +245,29 @@ public class MediaResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    
+
+    /**
+     * GET  /media/find-by-description/:description : get the "description" media.
+     *
+     * @param name the name of the media to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the media, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/media/find-by-description/{description}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Set<Media>> getMediaByDescription(@PathVariable String description) {
+        log.debug("REST request to get Media : {}", description);
+        Set<Media> media = mediaRepository.findByDescription(description);
+        return Optional.ofNullable(media)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+    
+    
     
 
     /**

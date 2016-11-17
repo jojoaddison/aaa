@@ -32,6 +32,10 @@
                 var url = "api/articles/by-pid/" + pid;
                 console.log(url);
                 return $http.get(url);
+            },
+            getByType: function(type){
+                var url = "api/articles/by-type/" + type;
+                return $http.get(url);
             }
         }
     }

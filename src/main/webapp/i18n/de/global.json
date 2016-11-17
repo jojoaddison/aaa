@@ -20,6 +20,9 @@
                 "article": "Article",
                 "slide": "Slide",
                 "slideShow": "Slide Show",
+                "member": "Member",
+                "donation": "Donation",
+                "fileDocument": "File Document",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

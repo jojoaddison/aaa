@@ -12,7 +12,6 @@
 
         vm.media = [];
 
-
         loadAll();
 
         function loadAll() {

@@ -50,5 +50,9 @@
         function collapseNavbar() {
             vm.isNavbarCollapsed = true;
         }
+
+        function loadProjects(){
+            vm.projects
+        }
     }
 })();

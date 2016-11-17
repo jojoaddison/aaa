@@ -4,7 +4,7 @@
             "home": {
                 "title": "Albums",
                 "createLabel": "Album erstellen",
-                "createOrEditLabel": "Album erstellen oder bearbeiten",
+                "createOrEditLabel": "Album verwalten",
                 "search": "Suche nach Album"
             },
             "created": "Album erstellt mit ID {{ param }}",

@@ -38,6 +38,14 @@
             uploadToMediaFS: function(files){
                 var url = "/api/media/files";
                 $http.post(url, files);
+            },
+            getMediaByDescription: function(description){
+                var url = "/api/media/find-by-description/"+description;
+                return $http.get(url);
+            },
+            deleteMedia: function(name){
+                var url = "/api/gridfs/"+name;
+                return $http.delete(url);
             }
         }
     }

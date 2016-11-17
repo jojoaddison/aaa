@@ -1,18 +1,29 @@
 package org.agreen.web.rest;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.inject.Inject;
 
 import org.agreen.domain.Album;
+import org.agreen.domain.Media;
 import org.agreen.repository.AlbumRepository;
+import org.agreen.service.util.Tools;
 import org.agreen.web.rest.util.HeaderUtil;
 import org.agreen.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +34,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.codahale.metrics.annotation.Timed;
 
@@ -39,7 +52,47 @@ public class AlbumResource {
     @Inject
     private AlbumRepository albumRepository;
     
+    @Value("${client.root-directory}")
+    private String rootDirectory;
+
+    @Inject
+    private Environment env;
     
+
+    private Media createMedia(MultipartFile mediaFile, String albumURL){
+    	Media media = new Media();
+			try{
+				
+		        String sep 		 = Tools.getSeparator();
+		      	  
+		        String directory = env.getProperty("client.root-directory");  	      	  
+				  
+		      	String filename  = albumURL + sep + Tools.removeSpaces(mediaFile.getOriginalFilename()).toLowerCase();  
+				  
+		        String filepath  = Paths.get(directory, filename).toString();
+		      
+		        log.debug("REST request to save Media at filepath: {}", filepath);
+		
+		        media.setName(filename);
+		        media.setSize(mediaFile.getSize());
+		        media.setType(mediaFile.getContentType());
+		        media.setUrl(filepath);
+		      
+		        log.debug("REST request to save Media : {}", media);
+		      
+		        // Save the file locally
+		        BufferedOutputStream stream =
+		          new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+		      
+		        stream.write(mediaFile.getBytes());
+		        stream.close();
+			      
+			}catch(Exception e){
+	    		log.debug(e.getMessage(), e.getCause());
+	    		return null;
+			}
+    	return media;
+    }
     
     /**
      * POST  /albums : Create a new album.
@@ -52,11 +105,26 @@ public class AlbumResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Album> createAlbum(@RequestBody Album album) throws URISyntaxException {
+    public ResponseEntity<Album> createAlbum(@RequestBody Album album, 
+    										@RequestParam("mediaFiles") MultipartFile[] mediaFiles) 
+    												throws URISyntaxException {
         log.debug("REST request to save Album : {}", album);
         if (album.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("album", "idexists", "A new album cannot already have an ID")).body(null);
+            return updateAlbum(album, mediaFiles);
         }
+        String sep = Tools.getSeparator();
+        String year = Tools.getYear();
+        String month = Tools.getMonth();
+        String day = Tools.getDay();
+        String hour = Tools.getHour();
+        String name = Tools.removeSpaces(album.getName());
+        String url = rootDirectory + sep + year + sep + month + sep + day + sep + hour + sep + name;
+        album.setUrl(url);
+        album.setCreatedDate(ZonedDateTime.now());
+        album.setModifiedDate(ZonedDateTime.now());
+        Set<Media> photos = new HashSet<>();
+        for(MultipartFile file: mediaFiles)photos.add(createMedia(file, url));
+        album.setPhotos(photos);
         Album result = albumRepository.save(album);
         return ResponseEntity.created(new URI("/api/albums/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("album", result.getId().toString()))
@@ -76,11 +144,12 @@ public class AlbumResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Album> updateAlbum(@RequestBody Album album) throws URISyntaxException {
+    public ResponseEntity<Album> updateAlbum(@RequestBody Album album, @RequestParam("mediaFiles") MultipartFile[] mediaFiles) throws URISyntaxException {
         log.debug("REST request to update Album : {}", album);
         if (album.getId() == null) {
-            return createAlbum(album);
+            return createAlbum(album, mediaFiles);
         }
+        album.setModifiedDate(ZonedDateTime.now());
         Album result = albumRepository.save(album);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("album", album.getId().toString()))

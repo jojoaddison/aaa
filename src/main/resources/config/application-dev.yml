@@ -32,8 +32,12 @@ spring:
         cache: false
 
 server:
-    port: 8080
-
+    port: 4080
+    
+client:
+    root-directory: /Users/kojo/workspace/agreen/webapp/content/pictures
+storage:
+    root: C:\\Users\\Kojo\\workspace\\gallery
 # ===================================================================
 # JHipster specific properties
 # ===================================================================

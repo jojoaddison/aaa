@@ -1,0 +1,62 @@
+
+<div>
+    <h2><span translate="agreenApp.member.detail.title">Member</span> {{vm.member.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="agreenApp.member.firstName">First Name</span></dt>
+        <dd>
+            <span>{{vm.member.firstName}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.middleNames">Middle Names</span></dt>
+        <dd>
+            <span>{{vm.member.middleNames}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.lastName">Last Name</span></dt>
+        <dd>
+            <span>{{vm.member.lastName}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.email">Email</span></dt>
+        <dd>
+            <span>{{vm.member.email}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.title">Title</span></dt>
+        <dd>
+            <span>{{vm.member.title}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.mobilePhone">Mobile Phone</span></dt>
+        <dd>
+            <span>{{vm.member.mobilePhone}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.telephoneNumber">Telephone Number</span></dt>
+        <dd>
+            <span>{{vm.member.telephoneNumber}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.display">Display</span></dt>
+        <dd>
+            <span>{{vm.member.display}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.status">Status</span></dt>
+        <dd>
+            <span>{{vm.member.status}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.donations">Donations</span></dt>
+        <dd>
+            <span>{{vm.member.donations}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.member.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span translate="agreenApp.member.modifiedDate">Modified Date</span></dt>
+        <dd>
+            <span>{{vm.member.modifiedDate | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

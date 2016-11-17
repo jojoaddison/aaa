@@ -1,0 +1,82 @@
+<div>
+    <h2 translate="agreenApp.member.home.title">Members</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="member.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="agreenApp.member.home.createLabel">
+                        Create new Member
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="firstName"><span translate="agreenApp.member.firstName">First Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="middleNames"><span translate="agreenApp.member.middleNames">Middle Names</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastName"><span translate="agreenApp.member.lastName">Last Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="email"><span translate="agreenApp.member.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span translate="agreenApp.member.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mobilePhone"><span translate="agreenApp.member.mobilePhone">Mobile Phone</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="telephoneNumber"><span translate="agreenApp.member.telephoneNumber">Telephone Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="display"><span translate="agreenApp.member.display">Display</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status"><span translate="agreenApp.member.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="donations"><span translate="agreenApp.member.donations">Donations</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span translate="agreenApp.member.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="modifiedDate"><span translate="agreenApp.member.modifiedDate">Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="member in vm.members track by member.id">
+                    <td><a ui-sref="member-detail({id:member.id})">{{member.id}}</a></td>
+                    <td>{{member.firstName}}</td>
+                    <td>{{member.middleNames}}</td>
+                    <td>{{member.lastName}}</td>
+                    <td>{{member.email}}</td>
+                    <td>{{member.title}}</td>
+                    <td>{{member.mobilePhone}}</td>
+                    <td>{{member.telephoneNumber}}</td>
+                    <td>{{member.display}}</td>
+                    <td>{{member.status}}</td>
+                    <td>{{member.donations}}</td>
+                    <td>{{member.createdDate | date:'medium'}}</td>
+                    <td>{{member.modifiedDate | date:'medium'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="member-detail({id:member.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="member.edit({id:member.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="member.delete({id:member.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
+</div>

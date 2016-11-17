@@ -74,6 +74,7 @@ public class GridFileResource {
           ByteArrayOutputStream os = new ByteArrayOutputStream();
           created.writeTo(os);
 	      Media media = new Media();
+	      media.setDescription(gallery);
 	      media.setCreatedDate(ZonedDateTime.now());
 	      media.setModifiedDate(ZonedDateTime.now());
 	      media.setId(savedFile.getId().toString());
@@ -182,5 +183,24 @@ public class GridFileResource {
 
   private static Query getFilenameQuery(String name) {
     return Query.query(GridFsCriteria.whereFilename().is(name));
+  }
+
+  /**
+   * DELETE  /media/:id : delete the "id" media.
+   *
+   * @param id the id of the media to delete
+   * @return the ResponseEntity with status 200 (OK)
+   */
+  @RequestMapping(value = "/{name}",
+      method = RequestMethod.DELETE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  @Timed
+  public ResponseEntity<Void> deleteMedia(@PathVariable String name) {
+      log.debug("REST request to delete Media : {}", name);
+      Optional<GridFSDBFile> existing = maybeLoadFile(name);
+      if (existing.isPresent()) {
+        gridFsTemplate.delete(getFilenameQuery(name));
+      }
+      return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("media", name)).build();
   }
 }

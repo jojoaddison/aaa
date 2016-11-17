@@ -1,0 +1,106 @@
+<div class="well well-md no-header mb-80">
+    <h2 translate="agreenApp.article.home.title">Articles</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-warning btn-sm" ng-click="vm.closeAll()">
+                    <span class="glyphicon glyphicon-eye-close"></span>&nbsp;Close all
+                </button>
+                <button class="btn btn-primary" ui-sref="article.create" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  translate="agreenApp.article.home.createLabel">
+                        Create new Article
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <!--
+                    <th><span translate="global.field.id">ID</span></th>
+                    -->
+                    <th class="text-left">
+                        <span translate="agreenApp.article.pid">Pid</span>
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="article in vm.articles track by article.id">
+                    <!--
+                    <td><a ui-sref="article-detail({id:article.id})">{{article.id}}</a></td>
+                    -->
+                    <td class="text-left">
+                        <div class="row">
+                            <button class="btn btn-primary btn-small" ng-click="vm.preview(article.pid)"  ng-if="article.preview == false">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                &nbsp;
+                                {{article.pid}}
+                            </button>
+
+                            <button class="btn btn-primary btn-small" ng-click="vm.closePreview(article)"  ng-if="article.preview == true">
+                                <span class="glyphicon glyphicon-eye-close"></span>
+                                &nbsp;
+                                {{article.pid}}
+                            </button>
+                        </div>
+                    </td>
+                    <td class="text-left">
+                        <div class="row"  ng-if="article.preview == true">
+                            <ul>
+                                <li ng-repeat=" page in article.pages track by $index">
+                                    <dl class="dl-horizontal jh-entity-details">
+                                        <dt><span translate="agreenApp.page.lang">Language</span></dt>
+                                        <dd>
+                                            <span>{{page.lang}}</span>
+                                        </dd>
+                                        <dt><span translate="agreenApp.page.name">Name</span></dt>
+                                        <dd>
+                                            <span>{{page.name}}</span>
+                                        </dd>
+                                        <dt><span translate="agreenApp.page.title">Title</span></dt>
+                                        <dd>
+                                            <span>{{page.title}}</span>
+                                        </dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <!--
+                            <button type="submit"
+                                    ui-sref="article-detail({id:article.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            -->
+                            <button type="submit"
+                                    ui-sref="article.edit({id:article.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="article.delete({id:article.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

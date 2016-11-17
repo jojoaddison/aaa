@@ -1,0 +1,29 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "amount",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "memberId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "donatedDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "projectId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        }
+    ],
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "donation",
+    "pagination": "no"
+}

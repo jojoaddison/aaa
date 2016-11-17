@@ -1,0 +1,26 @@
+{
+    "agreenApp": {
+        "fileDocument" : {
+            "home": {
+                "title": "File Documents",
+                "createLabel": "Create a new File Document",
+                "createOrEditLabel": "Create or edit a File Document",
+                "search": "Search for File Document"
+            },
+            "created": "A new File Document is created with identifier {{ param }}",
+            "updated": "A File Document is updated with identifier {{ param }}",
+            "deleted": "A File Document is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete File Document {{ id }}?"
+            },
+            "detail": {
+                "title": "File Document"
+            },
+            "category": "Category",
+            "dateCreated": "Date Created",
+            "fileType": "File Type",
+            "fileData": "File Data",
+            "fileName": "File Name"
+        }
+    }
+}

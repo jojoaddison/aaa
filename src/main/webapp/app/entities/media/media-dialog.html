@@ -11,6 +11,14 @@
         <p>&nbsp;</p>
 
         <div class="container-fluid">
+
+            <div class="form-group">
+                <label class="control-label" translate="agreenApp.media.description" for="field_description">Title</label>
+                <input type="text" class="form-control" name="description" id="field_description"
+                       ng-model="vm.gallery.description"
+                        />
+            </div>
+            <br />
             <div class="well well-md">
                 <form id="mediaForm" class="dropzone"
                       method="post"
@@ -22,12 +30,6 @@
                 </form>
             </div>
             <br>
-            <div class="form-group">
-                <label class="control-label" translate="agreenApp.media.description" for="field_description">Description</label>
-                <input type="text" class="form-control" name="description" id="field_description"
-                       ng-model="vm.media.description"
-                    />
-            </div>
         </div>
 
         <!--

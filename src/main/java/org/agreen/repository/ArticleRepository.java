@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface ArticleRepository extends MongoRepository<Article, String>{
 
 	Article findByPid(String pid);
+
+	Article findByType(String type);
 }

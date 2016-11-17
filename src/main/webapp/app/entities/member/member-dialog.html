@@ -1,0 +1,106 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myMemberLabel" translate="agreenApp.member.home.createOrEditLabel">Create or edit a Member</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.member.id">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.member.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.firstName" for="field_firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                    ng-model="vm.member.firstName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.middleNames" for="field_middleNames">Middle Names</label>
+            <input type="text" class="form-control" name="middleNames" id="field_middleNames"
+                    ng-model="vm.member.middleNames"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.lastName" for="field_lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                    ng-model="vm.member.lastName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.email" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                    ng-model="vm.member.email"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                    ng-model="vm.member.title"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.mobilePhone" for="field_mobilePhone">Mobile Phone</label>
+            <input type="text" class="form-control" name="mobilePhone" id="field_mobilePhone"
+                    ng-model="vm.member.mobilePhone"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.telephoneNumber" for="field_telephoneNumber">Telephone Number</label>
+            <input type="text" class="form-control" name="telephoneNumber" id="field_telephoneNumber"
+                    ng-model="vm.member.telephoneNumber"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.display" for="field_display">Display</label>
+            <input type="text" class="form-control" name="display" id="field_display"
+                    ng-model="vm.member.display"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.status" for="field_status">Status</label>
+            <input type="text" class="form-control" name="status" id="field_status"
+                    ng-model="vm.member.status"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.donations" for="field_donations">Donations</label>
+            <input type="text" class="form-control" name="donations" id="field_donations"
+                    ng-model="vm.member.donations"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.createdDate" for="field_createdDate">Created Date</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.member.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="agreenApp.member.modifiedDate" for="field_modifiedDate">Modified Date</label>
+                <div class="input-group">
+                    <input id="field_modifiedDate" type="text" class="form-control" name="modifiedDate" datetime-picker="{{dateformat}}" ng-model="vm.member.modifiedDate" is-open="vm.datePickerOpenStatus.modifiedDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('modifiedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

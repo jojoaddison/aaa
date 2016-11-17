@@ -1,0 +1,33 @@
+{
+    "agreenApp": {
+        "member" : {
+            "home": {
+                "title": "Members",
+                "createLabel": "Créer un nouveau Member",
+                "createOrEditLabel": "Créer ou éditer un Member",
+                "search": "Recherche pour Member"
+            },
+            "created": "Un nouveau Member a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Member avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Member avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Member {{ id }} ?"
+            },
+            "detail": {
+                "title": "Member"
+            },
+            "firstName": "First Name",
+            "middleNames": "Middle Names",
+            "lastName": "Last Name",
+            "email": "Email",
+            "title": "Title",
+            "mobilePhone": "Mobile Phone",
+            "telephoneNumber": "Telephone Number",
+            "display": "Display",
+            "status": "Status",
+            "donations": "Donations",
+            "createdDate": "Created Date",
+            "modifiedDate": "Modified Date"
+        }
+    }
+}
