@@ -10,6 +10,8 @@
 /node_tmp/**
 /node_modules/**
 /src/main/webapp/bower_component/**
+/src/main/webapp/content/pictures/**
+/src/main/webapp/data/**
 ######################
 # SASS
 ######################
