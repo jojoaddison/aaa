@@ -23,7 +23,7 @@
         vmEditor.showAlbumEditor = false;
 
         vmEditor.tinymceOptions = {
-            plugins: 'code'
+            plugins: "code media preview image imagetools"
         };
 
         vmEditor.toggleLinksEditor = toggleLinksEditor;

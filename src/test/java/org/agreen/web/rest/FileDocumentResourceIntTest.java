@@ -22,6 +22,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,12 +44,12 @@ public class FileDocumentResourceIntTest {
 
     private static final String DEFAULT_CATEGORY = "AAAAA";
     private static final String UPDATED_CATEGORY = "BBBBB";
-    private static final String DEFAULT_DATE_CREATED = "AAAAA";
-    private static final String UPDATED_DATE_CREATED = "BBBBB";
+    private static final LocalDate DEFAULT_DATE_CREATED = LocalDate.now();
+    private static final LocalDate UPDATED_DATE_CREATED = LocalDate.now();
     private static final String DEFAULT_FILE_TYPE = "AAAAA";
     private static final String UPDATED_FILE_TYPE = "BBBBB";
-    private static final String DEFAULT_FILE_DATA = "AAAAA";
-    private static final String UPDATED_FILE_DATA = "BBBBB";
+    private static final byte[] DEFAULT_FILE_DATA = ("AAAAA").getBytes();
+    private static final byte[] UPDATED_FILE_DATA = ("BBBBB").getBytes();
     private static final String DEFAULT_FILE_NAME = "AAAAA";
     private static final String UPDATED_FILE_NAME = "BBBBB";
 

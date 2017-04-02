@@ -9,7 +9,7 @@
 /node/**
 /node_tmp/**
 /node_modules/**
-
+/src/main/webapp/bower_component/**
 ######################
 # SASS
 ######################
@@ -133,3 +133,4 @@ Desktop.ini
 ######################
 .eslintcache
 /.apt_generated/
+src/main/webapp/bower_components

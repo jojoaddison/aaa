@@ -15,6 +15,7 @@
             </a>
             <br>
         </div>
+        
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
             <div class="container-fluid">
                 <div class="row">
@@ -112,13 +113,19 @@
                     </ul>
                 </div>
             </div>
-            <div class="container-fluid admin-header hidden-xs" ng-switch-when="true" has-authority="ROLE_ADMIN">
+            <div class="container-fluid admin-header hidden-xs" ng-switch-when="true" has-authority="ROLE_USER">
                 <div class="row">
                     <ul class="nav navbar-nav navbar-right">
                         <li ui-sref-active="active">
                             <a ui-sref="dashboard" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
                                 <span translate="global.menu.entities.dashboard">Dashboard</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="file-document" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
+                                <span translate="global.menu.entities.fileDocument">Dashboard</span>
                             </a>
                         </li>
                         <li uib-dropdown class="dropdown pointer">
